@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css';
-
+import Rating from './Rating';
+import Accordion from "./Accordion";
+import Star from "./star";
+import AppTitle from "./AppTitle";
 
 function App() {
     console.log("App rendering")
@@ -9,71 +11,11 @@ function App() {
             This is component
             <Rating/>
             <Accordion/>
-            <Rating />
+            <Rating/>
             <Star/>
             <AppTitle/>
         </div>
     );
-}
-
-function AppTitle() {
-    console.log("AppTitle rendering")
-    return <>"This is App component" </>
-}
-
-export function Rating() {
-    console.log("Rating rendering")
-    return (
-        <div>
-            <Star/>
-            <Star/>
-            <Star/>
-            <Star/>
-            <Star/>
-        </div>
-    )
-}
-
-export function Accordion() {
-    console.log("Accordion rendering")
-    return (
-        <div>
-            <AccordionTitle/>
-            <AccordionBody/>
-
-        </div>
-    )
-}
-
-function Star() {
-    console.log("star rendered")
-    return (
-        <div>
-            <div>star</div>
-        </div>
-    )
-}
-
-function AccordionTitle() {
-    console.log("AccordionTitle rendering")
-    return (
-        <div>
-            <h3>Menu</h3>
-        </div>
-    )
-}
-
-function AccordionBody() {
-    console.log("AccordionBody rendering")
-    return (
-        <div>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    )
 }
 
 export default App;

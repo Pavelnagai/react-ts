@@ -6,12 +6,12 @@ function App() {
     console.log("App rendering")
     return (
         <div>
-            <PageTitle title={"AppTite rendering"}/>
-            <div> This is component </div>
+            <PageTitle title={"AppTitle rendering"}/>
+            <div> This is component</div>
             Article1
             <Rating value={3}/>
-            <Accordion title={"Good morning"}/>
-            <Accordion title={"View beautiful"}/>
+            <Accordion titleValue={"Menu"} collapsed = {true}/>
+            <Accordion titleValue={"Users"} collapsed = {false}/>
             Article2
             <Rating value={0}/>
             <Rating value={1}/>
@@ -19,13 +19,15 @@ function App() {
             <Rating value={3}/>
             <Rating value={4}/>
             <Rating value={5}/>
-            <Rating value={6}/>
             <PageTitle title={"My friends"}/>
         </div>
     );
 }
-function PageTitle(props: any) {
-    debugger
+
+type PageTitlePropsType = {
+    title: string
+}
+function PageTitle(props: PageTitlePropsType) {
     console.log("AppTitle rendering")
     return <h1> {props.title} </h1>
 }

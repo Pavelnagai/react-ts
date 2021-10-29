@@ -2,7 +2,7 @@ import React from 'react';
 import {Accordion} from "./components/Accordion/Accordion";
 import {Rating} from "./components/Rating/rating";
 
-function App() {
+export function App() {
     console.log("App rendering")
     return (
         <div>

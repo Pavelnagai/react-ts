@@ -40,7 +40,7 @@ type AccordionTitlePropsType = {
     title: string
 }
 
-function AccordionTitle(props: AccordionTitlePropsType) {
+ function AccordionTitle(props: AccordionTitlePropsType) {
     console.log("AccordionTitle rendering")
     return (
         <div>

@@ -1,7 +1,10 @@
 .nav {
+    font-style: italic;
     grid-area: n;
     background-color: burlywood;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 .item {
-    color: azure;
+    color: black;
 }

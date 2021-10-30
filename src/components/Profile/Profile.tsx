@@ -16,7 +16,7 @@ const Profile = () => {
                 New posts
             </div>
             <div className={classn.item}>
-                post 1
+                My friend
             </div>
             <div className={classn.item}>
                 post 2

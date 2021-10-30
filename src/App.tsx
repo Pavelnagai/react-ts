@@ -2,15 +2,15 @@ import React from 'react';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
+import "./App.css"
 
-export function App() {
-    console.log("App rendering")
+const App = () => {
     return (
-        <div>
+        <div className={"app-wrapper"}>
             <Header/>
             <Navbar/>
             <Profile/>
-        </div>
-    );
+        </div>)
 }
+export default App;
 

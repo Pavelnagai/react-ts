@@ -1,9 +1,9 @@
-export function Header () {
-    console.log ("Header rendering")
-    return (
-        <div>
+import React from 'react';
 
-        </div>
-    )
-
+const Header = () => {
+    return <header className={"header"}>
+        <img
+            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOyCtPSy5vZ6NNKe6nmW5aEAWDfv2R3bV72g&usqp=CAU'}/>
+    </header>
 }
+export default Header

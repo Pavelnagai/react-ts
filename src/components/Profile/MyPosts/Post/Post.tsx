@@ -1,17 +1,16 @@
 import React from 'react';
 import classn from "./Post.module.css"
+import Like from "./Like/Like";
 
-const Post = () => {
+const Post = (props: any) => {
     return (
         <div>
-
             <div className={classn.item}>
-                <img
-                    src="https://images.beinsports.com/KscHKiqa7p3Vfv8MxqbFO3fpf2Q=/670x424/smart/lionel-messi_1rplyam066gri106a8czy2sdzr.jpg"/>
-                post 2
-                <div>
-                    <span>Like</span>
-                </div>
+                <h3>{props.title}</h3>
+                <img src={props.img}/>
+                <span>
+                    <Like value={5} />
+                </span>
             </div>
         </div>
     )

@@ -2,7 +2,12 @@ import React from 'react';
 import classn from "./Post.module.css"
 import Like from "./Like/Like";
 
-const Post = (props: any) => {
+type PostPropsType = {
+    title: string
+    value: number
+    img: any
+}
+const Post = (props: PostPropsType) => {
     return (
         <div>
             <div className={classn.item}>

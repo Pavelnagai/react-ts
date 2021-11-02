@@ -1,6 +1,9 @@
 import React from 'react';
 
-const Like = (props: any) => {
+type LikePropsType = {
+    value: number
+}
+const Like = (props: LikePropsType) => {
     if (props.value === 1) {
         return (
             <div>
@@ -73,7 +76,10 @@ const Like = (props: any) => {
 
 }
 
-const LikeView = (props: any) => {
+type LikeViewPropsType = {
+    selected: boolean
+}
+const LikeView = (props: LikeViewPropsType) => {
     if (props.selected === true) {
         return <span><b>Like</b> </span>
     } else {

@@ -1,8 +1,6 @@
 import React from 'react';
 import classn from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import Like from "./Post/Like/Like";
-
 
 const MyPosts = () => {
     return (

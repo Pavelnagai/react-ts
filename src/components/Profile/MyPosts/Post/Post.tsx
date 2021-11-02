@@ -8,9 +8,7 @@ const Post = (props: any) => {
             <div className={classn.item}>
                 <h3>{props.title}</h3>
                 <img src={props.img}/>
-                <span>
-                    <Like value={5} />
-                </span>
+                <Like value={props.value}/>
             </div>
         </div>
     )

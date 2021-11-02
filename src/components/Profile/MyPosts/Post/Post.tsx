@@ -3,17 +3,17 @@ import classn from "./Post.module.css"
 import Like from "./Like/Like";
 
 type PostPropsType = {
-    title: string
-    value: number
+    message: string
+    likeCheck: number
     img: any
 }
 const Post = (props: PostPropsType) => {
     return (
         <div>
             <div className={classn.item}>
-                <h3>{props.title}</h3>
+                <h3>{props.message}</h3>
                 <img src={props.img}/>
-                <Like value={props.value}/>
+                <Like likeCheck={props.likeCheck}/>
             </div>
         </div>
     )

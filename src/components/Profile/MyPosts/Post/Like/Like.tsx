@@ -4,10 +4,10 @@ type LikePropsType = {
     likeCheck: number
 }
 const Like = (props: LikePropsType) => {
-        return (
-            <div>
+    return (
+        <div>
             <span>Like {props.likeCheck}</span>
-            </div>
-        )
+        </div>
+    )
 }
 export default Like

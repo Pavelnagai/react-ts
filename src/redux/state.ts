@@ -25,9 +25,7 @@ export type DialogPagePropsType = {
     dialog: Array<DialogPropsType>
     message: Array<MessagePropsType>
 }
-export type SidebarPagePropsType = {
-
-}
+export type SidebarPagePropsType = {}
 
 let state: RootStateType = {
     profilePage: {
@@ -56,7 +54,6 @@ let state: RootStateType = {
             {id: 6, message: "David boy"}
         ]
     },
-    sidebarPage: {
-    }
+    sidebarPage: {}
 }
 export default state

@@ -8,26 +8,25 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
 import Music from "./components/Navbar/Music/Music";
-import  {RootStateType} from "./redux/state";
+import {RootStateType} from "./redux/state";
 
 export type AppPropsType = {
     state: RootStateType
 }
-const App = (props:AppPropsType) => {
+const App = (props: AppPropsType) => {
     return (
-        <BrowserRouter>
-            <div className={"app-wrapper"}>
-                <Header/>
-                <Navbar/>
-                <div className={"app-wrapper-content"}>
-                    <Route path='/profile' render={() => <Profile post={props.state.profilePage.post}/>}/>
-                    <Route path='/dialogs' render={() => <Dialogs message={props.state.dialogPage.message} dialog={props.state.dialogPage.dialog}/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                </div>
+        <div className={"app-wrapper"}>
+            <Header/>
+            <Navbar/>
+            <div className={"app-wrapper-content"}>
+                <Route path='/profile' render={() => <Profile post={props.state.profilePage.post}/>}/>
+                <Route path='/dialogs' render={() => <Dialogs message={props.state.dialogPage.message}
+                                                              dialog={props.state.dialogPage.dialog}/>}/>
+                <Route path='/news' render={() => <News/>}/>
+                <Route path='/settings' render={() => <Settings/>}/>
+                <Route path='/music' render={() => <Music/>}/>
             </div>
-        </BrowserRouter>
+        </div>
     )
 }
 export default App;

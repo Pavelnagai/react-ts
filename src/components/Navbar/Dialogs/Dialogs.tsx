@@ -11,7 +11,7 @@ const Dialogs = (props: DialogPagePropsType) => {
     let messageElement =
         props.message.map(m => <Message message={m.message}/>)
     return (
-        <div>
+        <div className={s.fullDialogs}>
             <div className={s.dialogs}>
                 <div className={s.dialogsItem}>
                     {dialogElements}

@@ -1,6 +1,7 @@
 .message {
     display: grid;
     grid-template-rows: 50px;
-   border-style: groove;
-  border-radius: 30px;
+    border-style: groove;
+    border-radius: 30px;
+    padding-left: 20px;
 }

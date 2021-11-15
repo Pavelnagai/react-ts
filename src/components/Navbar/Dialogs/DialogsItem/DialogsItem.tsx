@@ -11,7 +11,7 @@ const DialogItem: React.FC<DialogItemProps> = (props) => {
         <div className={s.dialog + " " + s.active}>
             <img
                 src="https://images.macrumors.com/t/gMpwGapfEGakqOCl4TFiAH3KcuQ=/1600x0/article-new/2021/09/apple-event-september-14.jpg"/>
-            <NavLink to={'/dialogs/' + props.id}> {props.name} </NavLink>
+            <NavLink className={s.user} to={'/dialogs/' + props.id}> {props.name} </NavLink>
         </div>
     )
 }

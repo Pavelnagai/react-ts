@@ -8,6 +8,8 @@ const MyPosts = (props:ProfilePagePropsType) => {
     let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
     return (
         <div className={classn.item}>
+            <input/>
+            <button onClick={ () => { alert ('hi') } }>Save</button>
             <h3>My Posts</h3>
             {postElement}
         </div>

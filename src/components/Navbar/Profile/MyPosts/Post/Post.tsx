@@ -1,6 +1,5 @@
 import React from 'react';
 import classn from "./Post.module.css"
-import Like from "./Like/Like";
 
 type PostPropsType = {
     message: string
@@ -13,7 +12,7 @@ const Post = (props: PostPropsType) => {
                 <img
                     src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgbvFfv0asMpnbwK_kbqMGgrTOeC0FR-lrXw&usqp=CAU"}/>
                 <h3>{props.message}</h3>
-                <Like likeCheck={props.likeCheck}/>
+                {`Like ${props.likeCheck}`}
             </div>
         </div>
 

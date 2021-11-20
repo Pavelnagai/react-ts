@@ -20,6 +20,8 @@ const Dialogs = (props: DialogPagePropsType) => {
                     {messageElement}
                 </div>
             </div>
+            <textarea> f</textarea>
+            <button className={s.buttonSend}>send</button>
         </div>
     )
 }

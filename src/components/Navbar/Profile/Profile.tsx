@@ -4,7 +4,6 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./Profileinfo/Profileinfo";
 import {ProfilePagePropsType} from "../../../redux/state";
 
-
 const Profile = (props: ProfilePagePropsType) => {
     return <div className={s.content}>
         <ProfileInfo/>

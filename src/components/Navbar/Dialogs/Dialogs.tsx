@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useRef} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogPagePropsType} from "../../../redux/state";
 
 const Dialogs = (props: DialogPagePropsType) => {
-
+    let newMessage = useRef<HTMLTextAreaElement>(null);
+    let Push = () => {
+        let text = newMessage.current?.value;
+        alert(text);
+    }
     let dialogElements =
         props.dialog.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messageElement =
@@ -20,8 +24,8 @@ const Dialogs = (props: DialogPagePropsType) => {
                     {messageElement}
                 </div>
             </div>
-            <textarea></textarea>
-            <button className={s.buttonSend}>send</button>
+            <textarea ref={newMessage}></textarea>
+            <button className={s.buttonSend} onClick={Push}>send</button>
         </div>
     )
 }

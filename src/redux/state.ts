@@ -19,7 +19,7 @@ export type MessagePropsType = {
 }
 
 export type ProfilePagePropsType = {
-    post: Array<PostPropsType>
+    post: Array<PostPropsType>,
 }
 export type DialogPagePropsType = {
     dialog: Array<DialogPropsType>
@@ -56,4 +56,14 @@ let state: RootStateType = {
     },
     sidebarPage: {}
 }
+
+// export let addPost = (postMessage: string) => {
+//     let newPost = {
+//         id: 5,
+//         message: postMessage,
+//         likeCheck: 0
+//     }
+//    state.profilePage.post.push(newPost)
+// }
+
 export default state

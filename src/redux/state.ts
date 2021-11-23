@@ -1,3 +1,5 @@
+import {v1} from "uuid";
+
 export type RootStateType = {
     profilePage: ProfilePagePropsType
     dialogPage: DialogPagePropsType
@@ -5,21 +7,21 @@ export type RootStateType = {
 }
 
 export type DialogPropsType = {
-    id: number
+    id: string
     name: string
 }
 export type PostPropsType = {
-    id: number
+    id: string
     message: string
     likeCheck: number
 }
 export type MessagePropsType = {
-    id: number
+    id: string
     message: string
 }
 
 export type ProfilePagePropsType = {
-    post: Array<PostPropsType>,
+    post:Array<PostPropsType>
 }
 export type DialogPagePropsType = {
     dialog: Array<DialogPropsType>
@@ -30,28 +32,28 @@ export type SidebarPagePropsType = {}
 let state: RootStateType = {
     profilePage: {
         post: [
-            {id: 1, message: "Post 1", likeCheck: 12},
-            {id: 2, message: "Post 2", likeCheck: 18},
-            {id: 3, message: "Post 3", likeCheck: 11},
-            {id: 4, message: "Post 4", likeCheck: 19},
+            {id: v1(), message: "Post 1", likeCheck: 12},
+            {id: v1(), message: "Post 2", likeCheck: 18},
+            {id: v1(), message: "Post 3", likeCheck: 11},
+            {id: v1(), message: "Post 4", likeCheck: 19},
         ],
     },
     dialogPage: {
         dialog: [
-            {id: 1, name: "Pavel"},
-            {id: 2, name: "Andrei"},
-            {id: 3, name: "Alina"},
-            {id: 4, name: "Anna"},
-            {id: 5, name: "Make"},
-            {id: 6, name: "David"}
+            {id: v1(), name: "Pavel"},
+            {id: v1(), name: "Andrei"},
+            {id: v1(), name: "Alina"},
+            {id: v1(), name: "Anna"},
+            {id: v1(), name: "Make"},
+            {id: v1(), name: "David"}
         ],
         message: [
-            {id: 1, message: "Hy"},
-            {id: 2, message: "Hello dad"},
-            {id: 3, message: "Your good friends"},
-            {id: 4, message: "Anna good girl"},
-            {id: 5, message: "Meat year"},
-            {id: 6, message: "David boy"}
+            {id: v1(), message: "Hy"},
+            {id: v1(), message: "Hello dad"},
+            {id: v1(), message: "Your good friends"},
+            {id: v1(), message: "Anna good girl"},
+            {id: v1(), message: "Meat year"},
+            {id: v1(), message: "David boy"}
         ]
     },
     sidebarPage: {}
@@ -59,7 +61,7 @@ let state: RootStateType = {
 
 // export let addPost = (postMessage: string) => {
 //     let newPost = {
-//         id: 5,
+//         id: v1(),
 //         message: postMessage,
 //         likeCheck: 0
 //     }

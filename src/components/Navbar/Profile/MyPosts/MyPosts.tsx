@@ -6,10 +6,12 @@ import {ProfilePagePropsType} from "../../../../redux/state";
 const MyPosts = (props: ProfilePagePropsType) => {
 
     let newPost = useRef<HTMLTextAreaElement>(null);
-    let Push = () => {
-        let text = newPost.current?.value;
-        alert(text);
-    }
+    // let addPost = () => {
+    //     let text = newPost.current?.value;
+    //     if (text) {
+    //         props.addPost(text);
+    //     }
+    // }
     let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
 
     return (
@@ -18,7 +20,7 @@ const MyPosts = (props: ProfilePagePropsType) => {
                 <textarea ref={newPost}>click me</textarea>
             </div>
             <div>
-                <button onClick={Push}>Save</button>
+                <button onClick={ () => {}}>Save</button>
             </div>
             <div>
                 <h3>My Posts</h3>

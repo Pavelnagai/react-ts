@@ -7,7 +7,7 @@ import {ProfilePagePropsType} from "../../../redux/state";
 const Profile = (props: ProfilePagePropsType) => {
     return <div className={s.content}>
         <ProfileInfo/>
-        <MyPosts post={props.post}/>
+        <MyPosts post={props.post} />
     </div>
 }
 export default Profile

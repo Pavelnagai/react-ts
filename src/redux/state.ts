@@ -1,5 +1,12 @@
 import {v1} from "uuid";
-
+ export type AddPropsType = {
+     newPost: (postMessage: string) => void
+ }
+export type NewPostType = {
+    id: string,
+    message: string,
+    likeCheck: number
+}
 export type RootStateType = {
     profilePage: ProfilePagePropsType
     dialogPage: DialogPagePropsType
@@ -56,16 +63,16 @@ let state: RootStateType = {
             {id: v1(), message: "David boy"}
         ]
     },
-    sidebarPage: {}
-}
+    sidebarPage: {},
+};
+export let addPost = (postMessage: string) => {
+    let newPost: NewPostType = {
+        id: v1(),
+        message: postMessage,
+        likeCheck: 0
+    }
+    state.profilePage.post.push(newPost)
 
-// export let addPost = (postMessage: string) => {
-//     let newPost = {
-//         id: v1(),
-//         message: postMessage,
-//         likeCheck: 0
-//     }
-//    state.profilePage.post.push(newPost)
-// }
+}
 
 export default state

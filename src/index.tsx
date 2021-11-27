@@ -4,7 +4,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from "./App";
 import state from "./redux/state";
-// import {addPost} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(

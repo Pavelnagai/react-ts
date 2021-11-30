@@ -1,20 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Navbar/Profile/Profile";
 import "./App.css"
 import Dialogs from "./components/Navbar/Dialogs/Dialogs";
-import { Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
 import Music from "./components/Navbar/Music/Music";
-import {AddPropsType, RootStateType} from "./redux/state";
-
+import {AddPropsType, RootStateType, updatePostText} from "./redux/state";
 
 
 export type AppPropsType = {
     state: RootStateType
     // newPost: AddPropsType
+    addPost: () => void
+    updatePostText: (newText: string)=>void
 }
 const App = (props: AppPropsType) => {
     return (
@@ -24,8 +25,10 @@ const App = (props: AppPropsType) => {
             <div className={"app-wrapper-content"}>
                 <Route path='/profile' render={() => <Profile
                     post={props.state.profilePage}
+                    messageForNewPost={props.state.profilePage.newPost}
                     // newPost={props.newPost}
-                    // addPost={props.addPost}
+                    updatePostText={props.updatePostText}
+                    addPost={props.addPost}
                 />}/>
                 <Route path='/dialogs' render={() => <Dialogs message={props.state.dialogPage.message}
                                                               dialog={props.state.dialogPage.dialog}/>}/>

@@ -1,13 +1,10 @@
 import {v1} from "uuid";
+import rerenderEntireTree from "../render";
 
 export type AddPropsType = {
     newPost: (postMessage: string) => void
 }
-export type NewPostType = {
-    id: string,
-    message: string,
-    likeCheck: number
-}
+
 export type RootStateType = {
     profilePage: ProfilePagePropsType
     dialogPage: DialogPagePropsType
@@ -30,6 +27,7 @@ export type MessagePropsType = {
 
 export type ProfilePagePropsType = {
     post: Array<PostPropsType>
+    newPost: string
 
 }
 export type DialogPagePropsType = {
@@ -46,6 +44,7 @@ let state: RootStateType = {
             {id: v1(), message: "Post 3", likeCheck: 11},
             {id: v1(), message: "Post 4", likeCheck: 19},
         ],
+        newPost: ''
     },
     dialogPage: {
         dialog: [
@@ -67,13 +66,18 @@ let state: RootStateType = {
     },
     sidebarPage: {},
 };
-export let addPost = (postMessage: string) => {
-    let newPost: NewPostType = {
+export let addPost = () => {
+    let newPost: PostPropsType = {
         id: v1(),
-        message: postMessage,
+        message: state.profilePage.newPost,
         likeCheck: 0
     }
     state.profilePage.post.push(newPost)
+    state.profilePage.newPost = ''
+    rerenderEntireTree(state)
 }
-
+export let updatePostText = (newText: string) => {
+    state.profilePage.newPost = newText
+    rerenderEntireTree(state)
+}
 export default state

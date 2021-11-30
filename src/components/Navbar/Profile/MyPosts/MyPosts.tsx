@@ -1,11 +1,13 @@
 import React, {ChangeEvent, useState} from 'react';
 import classn from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {AddPropsType, PostPropsType} from "../../../../redux/state";
+import {AddPropsType, PostPropsType, updatePostText} from "../../../../redux/state";
 
 type MyPostPropsType = {
     post: Array<PostPropsType>
-    // newPost: AddPropsType
+    addPost: () => void
+    messageForNewPost: string
+    updatePostText: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostPropsType) => {
@@ -13,14 +15,23 @@ const MyPosts = (props: MyPostPropsType) => {
     let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
-        let text = newPostElement.current?.value
-        alert(text)
+        if (newPostElement.current) {
+            props.addPost()
+        }
     }
+    const onChangeHandler = () => {
+        if (newPostElement.current)
+        {
+            let text = newPostElement.current?.value
+            props.updatePostText(text)
 
+        }
+        // props.updatePostText('')
+    }
     return (
         <div className={classn.item}>
             <div className={classn.button}>
-                <textarea ref={newPostElement}></textarea>
+                <textarea ref={newPostElement} value={props.messageForNewPost} onChange={onChangeHandler}/>
                 <button onClick={addPost}>Save</button>
             </div>
             <div>

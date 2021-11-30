@@ -1,7 +1,8 @@
 import {v1} from "uuid";
- export type AddPropsType = {
-     newPost: (postMessage: string) => void
- }
+
+export type AddPropsType = {
+    newPost: (postMessage: string) => void
+}
 export type NewPostType = {
     id: string,
     message: string,
@@ -28,7 +29,8 @@ export type MessagePropsType = {
 }
 
 export type ProfilePagePropsType = {
-    post:Array<PostPropsType>
+    post: Array<PostPropsType>
+
 }
 export type DialogPagePropsType = {
     dialog: Array<DialogPropsType>
@@ -72,7 +74,6 @@ export let addPost = (postMessage: string) => {
         likeCheck: 0
     }
     state.profilePage.post.push(newPost)
-
 }
 
 export default state

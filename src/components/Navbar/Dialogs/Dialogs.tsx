@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import {DialogPagePropsType} from "../../../redux/state";
 
 const Dialogs = (props: DialogPagePropsType) => {
-    let newMessage = useRef<HTMLTextAreaElement>(null);
+    let newMessage = React.createRef<HTMLTextAreaElement>()
     let Push = () => {
         let text = newMessage.current?.value;
         alert(text);

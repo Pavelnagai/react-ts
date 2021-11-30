@@ -12,7 +12,8 @@ export type ProfilePropsType= {
 const Profile = (props: ProfilePropsType) => {
     return <div className={s.content}>
         <ProfileInfo/>
-        <MyPosts post={props.post.post} />
+        <MyPosts post={props.post.post}
+        />
     </div>
 }
 export default Profile

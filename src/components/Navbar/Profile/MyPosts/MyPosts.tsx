@@ -1,37 +1,29 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
 import classn from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {AddPropsType, PostPropsType, updatePostText} from "../../../../redux/state";
 
 type MyPostPropsType = {
     post: Array<PostPropsType>
-    addPost: () => void
     messageForNewPost: string
+    addPost: () => void
     updatePostText: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostPropsType) => {
 
     let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
-        if (newPostElement.current) {
-            props.addPost()
-        }
+        props.addPost()
     }
-    const onChangeHandler = () => {
-        if (newPostElement.current)
-        {
-            let text = newPostElement.current?.value
-            props.updatePostText(text)
-
-        }
-        // props.updatePostText('')
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updatePostText(e.currentTarget.value)
     }
     return (
         <div className={classn.item}>
             <div className={classn.button}>
-                <textarea ref={newPostElement} value={props.messageForNewPost} onChange={onChangeHandler}/>
+                <textarea value={props.messageForNewPost}
+                          onChange={onChangeHandler}/>
                 <button onClick={addPost}>Save</button>
             </div>
             <div>

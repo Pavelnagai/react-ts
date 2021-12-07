@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import rerenderEntireTree from "../render";
+let rerenderEntireTree = (state: any) => {
+}
 
 export type AddPropsType = {
     newPost: (postMessage: string) => void
@@ -81,3 +82,7 @@ export let updatePostText = (newText: string) => {
     rerenderEntireTree(state)
 }
 export default state
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
+}

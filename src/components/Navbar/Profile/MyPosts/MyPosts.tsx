@@ -1,7 +1,7 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import classn from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {AddPropsType, PostPropsType, updatePostText} from "../../../../redux/state";
+import {PostPropsType} from "../../../../redux/state";
 
 type MyPostPropsType = {
     post: Array<PostPropsType>
@@ -15,6 +15,7 @@ const MyPosts = (props: MyPostPropsType) => {
     let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
     let addPost = () => {
         props.addPost()
+
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updatePostText(e.currentTarget.value)

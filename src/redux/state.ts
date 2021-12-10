@@ -1,12 +1,14 @@
 import {v1} from "uuid";
+import {type} from "os";
 
 export type StoreType = {
     _state: RootStateType,
     _rerenderEntireTree: () => void,
-    addPost: () => void,
-    updatePostText: (newText: string) => void
+    // addPost: () => void,
+    // updatePostText: (newText: string) => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
+    dispatch: (action: ActionsTypes) => void
 }
 export type RootStateType = {
     profilePage: ProfilePagePropsType
@@ -39,7 +41,14 @@ export type DialogPagePropsType = {
     message: Array<MessagePropsType>
 }
 export type SidebarPagePropsType = {}
-
+type AddPostActionType = {
+    type: "ADD-POST"
+}
+type UpdatePostTextActionType = {
+    type: "UPDATE-POST-TEXT"
+    newText: string
+}
+export type ActionsTypes = AddPostActionType | UpdatePostTextActionType
 
 let store: StoreType = {
     _state: {
@@ -72,29 +81,44 @@ let store: StoreType = {
         },
         sidebarPage: {},
     },
-    addPost() {
-        let newPost: PostPropsType = {
-            id: v1(),
-            message: this._state.profilePage.newPost,
-            likeCheck: 0
-        }
-        this._state.profilePage.post.push(newPost)
-        this._state.profilePage.newPost = ''
-        this._rerenderEntireTree()
-    },
+    // addPost() {
+    //     let newPost: PostPropsType = {
+    //         id: v1(),
+    //         message: this._state.profilePage.newPost,
+    //         likeCheck: 0
+    //     }
+    //     this._state.profilePage.post.push(newPost)
+    //     this._state.profilePage.newPost = ''
+    //     this._rerenderEntireTree()
+    // },
     _rerenderEntireTree() {
         console.log('state changed')
     },
-    updatePostText(newText: string) {
-        // this._state.profilePage.newPost = newText
-        this._state.profilePage.newPost = newText
-        this._rerenderEntireTree()
-    },
+    // updatePostText(newText: string) {
+    //     // this._state.profilePage.newPost = newText
+    //     this._state.profilePage.newPost = newText
+    //     this._rerenderEntireTree()
+    // },
     subscribe(observer) {
         this._rerenderEntireTree = observer
     },
     getState() {
         return this._state
+    },
+    dispatch (action) {
+        if (action.type === "ADD-POST") {
+            let newPost: PostPropsType = {
+                id: v1(),
+                message: this._state.profilePage.newPost,
+                likeCheck: 0
+            }
+            this._state.profilePage.post.push(newPost)
+            this._state.profilePage.newPost = ''
+            this._rerenderEntireTree()
+        } else if (action.type === "UPDATE-POST-TEXT") {
+            this._state.profilePage.newPost = action.newText
+            this._rerenderEntireTree()
+        }
     }
 }
 

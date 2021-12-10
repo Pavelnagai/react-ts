@@ -1,10 +1,16 @@
-import React, {useRef} from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {DialogPagePropsType} from "../../../redux/state";
+import {DialogPropsType, MessagePropsType} from "../../../redux/state";
 
-const Dialogs = (props: DialogPagePropsType) => {
+export type DialogType = {
+    dialog: Array<DialogPropsType>
+    message: Array<MessagePropsType>
+}
+
+
+const Dialogs = (props: DialogType) => {
     let newMessage = React.createRef<HTMLTextAreaElement>()
     let Push = () => {
         let text = newMessage.current?.value;

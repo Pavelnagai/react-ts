@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {type} from "os";
 import {ChangeEvent} from "react";
 
 export type StoreType = {

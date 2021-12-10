@@ -6,8 +6,6 @@ import {ActionsTypes, addPostAC, PostPropsType, updatePostTextAC} from "../../..
 type MyPostPropsType = {
     post: Array<PostPropsType>
     messageForNewPost: string
-    // addPost: () => void
-    // updatePostText: (newText: string) => void
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -15,12 +13,9 @@ const MyPosts = (props: MyPostPropsType) => {
 
     let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
     let addPost = () => {
-        // props.addPost()
         props.dispatch(addPostAC())
-
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.updatePostText(e.currentTarget.value)
         props.dispatch(updatePostTextAC(e))
     }
     return (

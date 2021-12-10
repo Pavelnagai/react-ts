@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {type} from "os";
+import {ChangeEvent} from "react";
 
 export type StoreType = {
     _state: RootStateType,
@@ -41,14 +42,7 @@ export type DialogPagePropsType = {
     message: Array<MessagePropsType>
 }
 export type SidebarPagePropsType = {}
-type AddPostActionType = {
-    type: "ADD-POST"
-}
-type UpdatePostTextActionType = {
-    type: "UPDATE-POST-TEXT"
-    newText: string
-}
-export type ActionsTypes = AddPostActionType | UpdatePostTextActionType
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updatePostTextAC>
 
 let store: StoreType = {
     _state: {
@@ -105,7 +99,7 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch (action) {
+    dispatch(action) {
         if (action.type === "ADD-POST") {
             let newPost: PostPropsType = {
                 id: v1(),
@@ -124,3 +118,16 @@ let store: StoreType = {
 
 
 export default store
+
+export const addPostAC = () => {
+    return {
+        type: "ADD-POST"
+    } as const
+}
+
+export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    return {
+        type: "UPDATE-POST-TEXT",
+        newText: e.currentTarget.value
+    } as const
+}

@@ -1,25 +1,38 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {DialogPropsType, MessagePropsType} from "../../../redux/state";
+import {
+    ActionsTypes,
+    DialogPropsType,
+    MessagePropsType,
+    RootStateType,
+    sendMessageCreate,
+    StoreType, updateMessageTextAC
+} from "../../../redux/state";
 
 export type DialogType = {
     dialog: Array<DialogPropsType>
     message: Array<MessagePropsType>
+    store: StoreType
+    dispatch: (action: ActionsTypes) => void
 }
 
 
 const Dialogs = (props: DialogType) => {
-    let newMessage = React.createRef<HTMLTextAreaElement>()
-    let Push = () => {
-        let text = newMessage.current?.value;
-        alert(text);
+    let state = props.store.getState().dialogPage
+
+    let dialogElements = props.dialog.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let messageElement = props.message.map(m => <Message message={m.message}/>)
+    let newMessageBody = state.newMessageBody
+
+    const onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreate())
     }
-    let dialogElements =
-        props.dialog.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messageElement =
-        props.message.map(m => <Message message={m.message}/>)
+    const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = e.currentTarget.value
+        props.store.dispatch(updateMessageTextAC(body))
+    }
     return (
         <div className={s.fullDialogs}>
             <div className={s.dialogs}>
@@ -30,8 +43,8 @@ const Dialogs = (props: DialogType) => {
                     {messageElement}
                 </div>
             </div>
-            <textarea ref={newMessage}></textarea>
-            <button className={s.buttonSend} onClick={Push}>send</button>
+            <textarea value={newMessageBody} onChange={onChangeTextArea}/>
+            <button className={s.buttonSend} onClick={onSendMessageClick}>send</button>
         </div>
     )
 }

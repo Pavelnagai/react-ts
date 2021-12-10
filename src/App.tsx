@@ -7,7 +7,7 @@ import {Route} from "react-router-dom";
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
 import Music from "./components/Navbar/Music/Music";
-import {StoreType,} from "./redux/state";
+import store, {StoreType,} from "./redux/state";
 import React from "react";
 
 
@@ -28,7 +28,10 @@ const App: React.FC<AppPropsType> = (props) => {
                     dispatch={props.store.dispatch.bind(props.store)}
                 />}/>
                 <Route path='/dialogs' render={() => <Dialogs message={state.dialogPage.message}
-                                                              dialog={state.dialogPage.dialog}/>}/>
+                                                              dialog={state.dialogPage.dialog}
+                                                              store={store}
+                                                              dispatch={props.store.dispatch.bind(props.store)}
+                />}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
                 <Route path='/music' render={() => <Music/>}/>

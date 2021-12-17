@@ -6,12 +6,17 @@ const NEW_MESSAGE_BODY = "NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
 
 export const dialogReducer = (state: DialogPagePropsType, action: any) => {
-    if (action.type === NEW_MESSAGE_BODY) {
-        state.newMessageBody = action.body
-    } else if (action.type === SEND_MESSAGE) {
-        let body = state.newMessageBody
-        state.newMessageBody = ''
-        state.message.push({id: v1(), message: body},)
+    switch (action.type) {
+        case NEW_MESSAGE_BODY:
+            state.newMessageBody = action.body
+            return state
+        case SEND_MESSAGE :
+            let body = state.newMessageBody
+            state.newMessageBody = ''
+            state.message.push({id: v1(), message: body},)
+            return state
+        default:
+            return state
     }
 }
 

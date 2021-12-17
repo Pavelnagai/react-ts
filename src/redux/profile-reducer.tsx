@@ -7,17 +7,22 @@ const ADD_POST = "ADD-POST"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
 
 
-export const profileReducer = (state:ProfilePagePropsType, action:any) => {
-    if (action.type === ADD_POST) {
-        let newPost: PostPropsType = {
-            id: v1(),
-            message: state.newPost,
-            likeCheck: 0
-        }
-        state.post.push(newPost)
-        state.newPost = ''
-    } else if (action.type === UPDATE_POST_TEXT) {
-        state.newPost = action.newText
+export const profileReducer = (state: ProfilePagePropsType, action: any) => {
+    switch (action.type) {
+        case ADD_POST:
+            let newPost: PostPropsType = {
+                id: v1(),
+                message: state.newPost,
+                likeCheck: 0
+            }
+            state.post.push(newPost)
+            state.newPost = ''
+            return state
+        case UPDATE_POST_TEXT:
+            state.newPost = action.newText
+            return state
+        default:
+            return state
     }
 }
 

@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {addPostAC, profileReducer, updatePostTextAC} from "./profile-reducer";
 import {dialogReducer, sendMessageCreate, updateMessageTextAC} from "./dialog-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 export type StoreType = {
     _state: RootStateType,
@@ -92,7 +93,7 @@ let store: StoreType = {
     dispatch(action: any) {
         profileReducer(this._state.profilePage, action)
         dialogReducer(this._state.dialogPage, action)
-        // sidebarReducer(this._state.sidebarPage, action)
+        sidebarReducer(this._state.sidebarPage, action)
         this._rerenderEntireTree()
     }
 }
@@ -100,25 +101,3 @@ let store: StoreType = {
 
 export default store
 
-// export const addPostAC = () => {
-//     return {
-//         type: ADD_POST
-//     } as const
-// };
-// export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
-//     return {
-//         type: UPDATE_POST_TEXT,
-//         newText: e.currentTarget.value
-//     } as const
-// };
-// export const sendMessageCreate = () => {
-//     return {
-//         type: SEND_MESSAGE,
-//     } as const
-// };
-// export const updateMessageTextAC = (body: string) => {
-//     return {
-//         type: NEW_MESSAGE_BODY,
-//         body: body
-//     } as const
-// };

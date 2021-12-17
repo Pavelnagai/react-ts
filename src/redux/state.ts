@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {ChangeEvent} from "react";
+import {addPostAC, profileReducer, updatePostTextAC} from "./profile-reducer";
+import {dialogReducer, sendMessageCreate, updateMessageTextAC} from "./dialog-reducer";
 
 export type StoreType = {
     _state: RootStateType,
@@ -47,11 +48,6 @@ export type ActionsTypes =
     ReturnType<typeof updateMessageTextAC>
 
 
-const ADD_POST = "ADD-POST"
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
-const NEW_MESSAGE_BODY = "NEW_MESSAGE_BODY"
-const SEND_MESSAGE = "SEND_MESSAGE"
-
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -93,53 +89,36 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost: PostPropsType = {
-                id: v1(),
-                message: this._state.profilePage.newPost,
-                likeCheck: 0
-            }
-            this._state.profilePage.post.push(newPost)
-            this._state.profilePage.newPost = ''
-            this._rerenderEntireTree()
-        } else if (action.type === UPDATE_POST_TEXT) {
-            this._state.profilePage.newPost = action.newText
-            this._rerenderEntireTree()
-        } else if (action.type === NEW_MESSAGE_BODY) {
-            this._state.dialogPage.newMessageBody = action.body
-            this._rerenderEntireTree()
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._state.dialogPage.newMessageBody
-            this._state.dialogPage.newMessageBody = ''
-            this._state.dialogPage.message.push({id: v1(), message: body},)
-            this._rerenderEntireTree()
-        }
+    dispatch(action: any) {
+        profileReducer(this._state.profilePage, action)
+        dialogReducer(this._state.dialogPage, action)
+        // sidebarReducer(this._state.sidebarPage, action)
+        this._rerenderEntireTree()
     }
 }
 
 
 export default store
 
-export const addPostAC = () => {
-    return {
-        type: ADD_POST
-    } as const
-};
-export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    return {
-        type: UPDATE_POST_TEXT,
-        newText: e.currentTarget.value
-    } as const
-};
-export const sendMessageCreate = () => {
-    return {
-        type: SEND_MESSAGE,
-    } as const
-};
-export const updateMessageTextAC = (body: string) => {
-    return {
-        type: NEW_MESSAGE_BODY,
-        body: body
-    } as const
-};
+// export const addPostAC = () => {
+//     return {
+//         type: ADD_POST
+//     } as const
+// };
+// export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
+//     return {
+//         type: UPDATE_POST_TEXT,
+//         newText: e.currentTarget.value
+//     } as const
+// };
+// export const sendMessageCreate = () => {
+//     return {
+//         type: SEND_MESSAGE,
+//     } as const
+// };
+// export const updateMessageTextAC = (body: string) => {
+//     return {
+//         type: NEW_MESSAGE_BODY,
+//         body: body
+//     } as const
+// };

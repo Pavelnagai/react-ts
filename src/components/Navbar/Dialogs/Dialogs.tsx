@@ -11,17 +11,17 @@ import {ActionsTypes, DialogPropsType, MessagePropsType, StoreType} from "../../
 export type DialogType = {
     dialog: Array<DialogPropsType>
     message: Array<MessagePropsType>
-    store: StoreType
+    store: any
     dispatch: (action: ActionsTypes) => void
 }
 
 
 const Dialogs = (props: DialogType) => {
-    let state = props.store.getState().dialogPage
+    // let state = props.store.getState().dialogPage
 
     let dialogElements = props.dialog.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messageElement = props.message.map(m => <Message message={m.message}/>)
-    let newMessageBody = state.newMessageBody
+    let newMessageBody = props.store.newMessageBody
 
     const onSendMessageClick = () => {
         props.store.dispatch(sendMessageCreate())

@@ -3,40 +3,40 @@ import {addPostAC, profileReducer, updatePostTextAC} from "./profile-reducer";
 import {dialogReducer, sendMessageCreate, updateMessageTextAC} from "./dialog-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType,
     _rerenderEntireTree: () => void,
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePagePropsType
     dialogPage: DialogPagePropsType
     sidebarPage: SidebarPagePropsType
 }
-export type AddPropsType = {
+type AddPropsType = {
     newPost: (postMessage: string) => void
 }
-export type DialogPropsType = {
+type DialogPropsType = {
     id: string
     name: string
 }
-export type PostPropsType = {
+type PostPropsType = {
     id: string
     message: string
     likeCheck: number
 }
-export type MessagePropsType = {
+type MessagePropsType = {
     id: string
     message: string
 }
-export type ProfilePagePropsType = {
+type ProfilePagePropsType = {
     post: Array<PostPropsType>
     newPost: string
 
 }
-export type DialogPagePropsType = {
+type DialogPagePropsType = {
     dialog: Array<DialogPropsType>
     message: Array<MessagePropsType>
     newMessageBody: string

@@ -1,21 +1,26 @@
 import {v1} from "uuid";
-import {PostPropsType, ProfilePagePropsType} from "./state";
 import {ChangeEvent} from "react";
 
 
 const ADD_POST = "ADD-POST"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
-
+export type PostPropsType = {
+    id: string
+    message: string
+    likeCheck: number
+}
+export type InitialStateProfileType = typeof initialState
 let initialState = {
     post: [
         {id: v1(), message: "Post 1", likeCheck: 12},
         {id: v1(), message: "Post 2", likeCheck: 18},
         {id: v1(), message: "Post 3", likeCheck: 11},
         {id: v1(), message: "Post 4", likeCheck: 19},
-    ],
+    ] as Array<PostPropsType>,
     newPost: ''
 }
-export const profileReducer = (state: ProfilePagePropsType = initialState, action: any) => {
+type ActionType = addPostType | updatePostTextType
+export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostPropsType = {
@@ -33,12 +38,13 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
             return state
     }
 }
-
+type addPostType = ReturnType<typeof addPostAC>
 export const addPostAC = () => {
     return {
         type: ADD_POST
     } as const
 };
+type updatePostTextType = ReturnType<typeof updatePostTextAC>
 export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {
         type: UPDATE_POST_TEXT,

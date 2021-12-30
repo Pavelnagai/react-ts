@@ -1,9 +1,17 @@
 import {v1} from "uuid";
-import {DialogPagePropsType} from "./state";
 
 
 const NEW_MESSAGE_BODY = "NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
+type DialogPropsType = {
+    id: string
+    name: string
+}
+type MessagePropsType = {
+    id: string
+    message: string
+}
+export type InitialStateDialogType = typeof initialState
 
 let initialState = {
     dialog: [
@@ -13,7 +21,7 @@ let initialState = {
         {id: v1(), name: "Anna"},
         {id: v1(), name: "Make"},
         {id: v1(), name: "David"}
-    ],
+    ] as Array<DialogPropsType>,
     message: [
         {id: v1(), message: "Hy"},
         {id: v1(), message: "Hello dad"},
@@ -21,10 +29,11 @@ let initialState = {
         {id: v1(), message: "Anna good girl"},
         {id: v1(), message: "Meat year"},
         {id: v1(), message: "David boy"}
-    ],
+    ] as Array<MessagePropsType>,
     newMessageBody: ''
-}
-export const dialogReducer = (state: DialogPagePropsType = initialState, action: any) => {
+};
+type ActionType = SendMessageType | updateMessageType
+export const dialogReducer = (state: InitialStateDialogType = initialState, action: ActionType): InitialStateDialogType => {
     switch (action.type) {
         case NEW_MESSAGE_BODY:
             state.newMessageBody = action.body
@@ -38,12 +47,13 @@ export const dialogReducer = (state: DialogPagePropsType = initialState, action:
             return state
     }
 }
-
+type SendMessageType = ReturnType<typeof sendMessageCreate>
 export const sendMessageCreate = () => {
     return {
         type: SEND_MESSAGE,
     } as const
 };
+type updateMessageType = ReturnType<typeof updateMessageTextAC>
 export const updateMessageTextAC = (body: string) => {
     return {
         type: NEW_MESSAGE_BODY,

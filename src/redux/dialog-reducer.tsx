@@ -35,18 +35,18 @@ let initialState = {
 type ActionType = SendMessageType | updateMessageType
 export const dialogReducer = (state: InitialStateDialogType = initialState, action: ActionType): InitialStateDialogType => {
     switch (action.type) {
-        case NEW_MESSAGE_BODY: {
-            let stateCopy = {...state}
-            stateCopy.newMessageBody = action.body
-            return stateCopy
-        }
+        case NEW_MESSAGE_BODY:
+            return {
+                ...state,
+                newMessageBody: action.body
+            }
         case SEND_MESSAGE : {
-            let stateCopy = {...state}
-            let body = stateCopy.newMessageBody
-            stateCopy.newMessageBody = ''
-            stateCopy.message = [...state.message]
-            stateCopy.message.push({id: v1(), message: body},)
-            return stateCopy
+            let body = state.newMessageBody
+            return {
+                ...state,
+                newMessageBody: "",
+                message: [...state.message, {id: v1(), message: body}]
+            }
         }
         default:
             return state

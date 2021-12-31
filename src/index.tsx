@@ -6,7 +6,7 @@ import {store} from "./redux/store-redux";
 import ReactDOM from "react-dom";
 
 
-export let rerenderTree = (state: any) => {
+// export let rerenderTree = (state: any) => {
 
     ReactDOM.render(
         <BrowserRouter>
@@ -15,13 +15,13 @@ export let rerenderTree = (state: any) => {
             </Provider>
         </BrowserRouter>,
         document.getElementById('root'));
-}
+// }
 
-rerenderTree(store.getState())
-store.subscribe(() => {
-    let state = store.getState()
-    rerenderTree(state)
-})
+// rerenderTree(store.getState())
+// store.subscribe(() => {
+//     let state = store.getState()
+//     rerenderTree(state)
+// })
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

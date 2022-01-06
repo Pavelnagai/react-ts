@@ -1,11 +1,9 @@
-import {v1} from "uuid";
-
 type UserLocation = {
     city: string,
     country: string
 }
 export type UserPropsType = {
-    photoUrl: string
+    photos: any
     id: string
     followed: boolean
     fullName: string

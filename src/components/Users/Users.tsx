@@ -5,16 +5,12 @@ import axios from "axios";
 import image from '../../assect/images/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
 
 class Users extends React.Component<UsersPropsType, any> {
-    constructor(props: UsersPropsType) {
-        super(props);
-        {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(responce => {
-                    this.props.setUsers(responce.data.items)
-                })
-        }
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(responce => {
+                this.props.setUsers(responce.data.items)
+            })
     }
-
     render() {
         return (
             <div>

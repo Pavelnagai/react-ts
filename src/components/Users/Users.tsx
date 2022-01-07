@@ -4,22 +4,21 @@ import styles from './user.module.css'
 import axios from "axios";
 import image from '../../assect/images/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
 
-
-const User = (props: UsersPropsType) => {
-    const getUsers = () => {
-        if (state.users.length === 0) {
+class Users extends React.Component<UsersPropsType, any> {
+    constructor(props: UsersPropsType) {
+        super(props);
+        {
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(responce => {
-                    props.setUsers(responce.data.items)
+                    this.props.setUsers(responce.data.items)
                 })
         }
     }
-    let state = props.userPage
 
-    return (
-        <div>
-            <button onClick={getUsers}>Get Users</button>
-            {state.users.map(u => <div key={u.id}>
+    render() {
+        return (
+            <div>
+                {this.props.userPage.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <img src={u.photos.small !== null ? u.photos.small : image} className={styles.userPhoto}/>
@@ -27,14 +26,14 @@ const User = (props: UsersPropsType) => {
                     <div>
                         {u.followed
                             ? <button onClick={() => {
-                                props.follow(u.id)
+                                this.props.follow(u.id)
                             }}>follow</button>
                             : <button onClick={() => {
-                                props.unFollow(u.id)
+                                this.props.unFollow(u.id)
                             }}>unFollow</button>}
                     </div>
                 </span>
-                <span>
+                    <span>
                     <span>
                         <div>{'u.fullName'}</div>
                         <div>{u.status}</div>
@@ -44,9 +43,10 @@ const User = (props: UsersPropsType) => {
                         <div>{'u.location.country'}</div>
                     </span>
                 </span>
-            </div>)}
-        </div>
-    );
-};
+                </div>)}
+            </div>
+        );
+    }
+}
 
-export default User;
+export default Users;

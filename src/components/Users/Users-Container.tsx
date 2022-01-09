@@ -3,12 +3,12 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store-redux";
 import {Dispatch} from "redux";
 import {
-    followAC,
+    follow,
     InitialStateUsersType,
-    setCurrentPageAC,
-    setUsersAc,
-    setUsersTotalCountAC, toggleIsFetchingAC,
-    unfollowAC,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount, setToggleFetching,
+    unFollow,
     UserPropsType
 } from "../../redux/users-reducer";
 import axios from "axios";
@@ -24,7 +24,7 @@ class UsersContainer extends React.Component<UsersPropsType, any> {
             .then(responce => {
                 this.props.setToggleFetching(false)
                 this.props.setUsers(responce.data.items)
-                this.props.setTotalUsersCount(responce.data.totalCount)
+                this.props.setUsersTotalCount(responce.data.totalCount)
             })
     }
 
@@ -68,7 +68,7 @@ type MapDispatchType = {
     unFollow: (userID: string) => void,
     setUsers: (users: UserPropsType[]) => void
     setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (pageNumber: number) => void
+    setUsersTotalCount: (pageNumber: number) => void
     setToggleFetching: (isFetching: boolean) => void
 }
 export type UsersPropsType = MapStateType & MapDispatchType
@@ -82,28 +82,13 @@ let mapStateToProps = (state: AppStateType): MapStateType => {
     }
 
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
-    return {
-        follow: (userID: string) => {
-            dispatch(followAC(userID))
-        },
-        unFollow: (userID: string) => {
-            dispatch(unfollowAC(userID))
-        },
-        setUsers: (users: UserPropsType[]) => {
-            dispatch(setUsersAc(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setUsersTotalCountAC(totalCount))
-        },
-        setToggleFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        },
-    }
-}
 
-const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+const UserContainer = connect(mapStateToProps, {
+    follow,
+    unFollow,
+    setUsers,
+    setCurrentPage,
+    setUsersTotalCount,
+    setToggleFetching
+})(UsersContainer)
 export default UserContainer

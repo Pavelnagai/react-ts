@@ -1,3 +1,10 @@
+const FOLLOW = "FOLLOW"
+const UNFOLLOW = "UNFOLLOW"
+const SET_USERS = "SET_USERS"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const SET_TOTAL_COUNT = "SET_TOTAL_COUNT"
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
+
 type UserLocation = {
     city: string,
     country: string
@@ -24,38 +31,40 @@ let initialState: InitialStateUsersType = {
     currentPage: 1,
     isFetching: true
 }
+
+
 type ActionType = FollowType | UnFollowType | SetUsersType | SetCurrentPageType | SetTotalCountType | ToggleFetchingType
 export const usersReducer = (state: InitialStateUsersType = initialState, action: ActionType): InitialStateUsersType => {
     switch (action.type) {
-        case "FOLLOW": {
+        case FOLLOW: {
             return {
                 ...state,
                 users: state.users.map(u => u.id === action.payload.userID ? {...u, followed: false} : u)
             }
         }
-        case "UNFOLLOW": {
+        case UNFOLLOW: {
             return {
                 ...state,
                 users: state.users.map(u => u.id === action.payload.userID ? {...u, followed: true} : u)
             }
         }
-        case "SET-USERS": {
+        case SET_USERS: {
             return {
                 ...state,
                 users: action.payload.users
             }
         }
-        case "SET_CURRENT_PAGE":
+        case SET_CURRENT_PAGE:
             return {
                 ...state,
                 currentPage: action.currantPage
             }
-        case "SET_TOTAL_COUNT":
+        case SET_TOTAL_COUNT:
             return {
                 ...state,
                 totalUserCount: action.totalCount
             }
-        case "TOGGLE_IS_FETCHING":
+        case TOGGLE_IS_FETCHING:
             return {
                 ...state,
                 isFetching: action.isFetching
@@ -64,53 +73,54 @@ export const usersReducer = (state: InitialStateUsersType = initialState, action
             return state
     }
 }
-type FollowType = ReturnType<typeof follow>
+export type FollowType = ReturnType<typeof follow>
+export type UnFollowType = ReturnType<typeof unFollow>
+export type SetUsersType = ReturnType<typeof setUsers>
+export type SetCurrentPageType = ReturnType<typeof setCurrentPage>
+export type SetTotalCountType = ReturnType<typeof setUsersTotalCount>
+export type ToggleFetchingType = ReturnType<typeof setToggleFetching>
+
 export const follow = (userID: string) => {
     return {
-        type: 'FOLLOW',
+        type: FOLLOW,
         payload: {
             userID
         }
     } as const
 }
-type UnFollowType = ReturnType<typeof unFollow>
 export const unFollow = (userID: string) => {
     return {
-        type: 'UNFOLLOW',
+        type: UNFOLLOW,
         payload: {
             userID
         }
     } as const
 }
-type SetUsersType = ReturnType<typeof setUsers>
 export const setUsers = (users: UserPropsType[]) => {
     return {
-        type: 'SET-USERS',
+        type: SET_USERS,
         payload: {
             users
         }
     } as const
 }
-type SetCurrentPageType = ReturnType<typeof setCurrentPage>
 export const setCurrentPage = (currantPage: number) => {
     return {
-        type: 'SET_CURRENT_PAGE',
+        type: SET_CURRENT_PAGE,
         currantPage
     } as const
 }
-type SetTotalCountType = ReturnType<typeof setUsersTotalCount>
-
 export const setUsersTotalCount = (totalCount: number) => {
     return {
-        type: 'SET_TOTAL_COUNT',
+        type: SET_TOTAL_COUNT,
         totalCount
     } as const
 }
-type ToggleFetchingType = ReturnType<typeof setToggleFetching>
 export const setToggleFetching = (isFetching: boolean) => {
     return {
-        type: 'TOGGLE_IS_FETCHING',
+        type: TOGGLE_IS_FETCHING,
         isFetching
     } as const
 }
+
 export default usersReducer

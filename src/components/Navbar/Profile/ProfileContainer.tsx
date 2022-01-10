@@ -1,12 +1,10 @@
 import React from 'react';
-import Profile, {ProfilePropsType} from "./Profile";
+import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {InitialStateProfileType, setUsersProfile} from "../../../redux/profile-reducer";
-import profile from "./Profile";
+import {setUsersProfile} from "../../../redux/profile-reducer";
 import {AppStateType} from "../../../redux/store-redux";
 
-// export type ProfilePropsType = {}
 
 class ProfileContainer extends React.Component<any, any> {
     componentDidMount() {
@@ -22,9 +20,34 @@ class ProfileContainer extends React.Component<any, any> {
         )
     }
 }
+
 export type ProfileContainerPropsType = MapStateType & MapDispatchType
+type contactsProfile = {
+    "facebook": string,
+    "website": null,
+    "vk": string,
+    "twitter": string,
+    "instagram": string,
+    "youtube": null,
+    "github": string,
+    "mainLink": null
+}
+type photosProfile = {
+    "small": string,
+    "large": string
+}
+
+
 type MapStateType = {
-    profile: any
+    profile: {
+        "aboutMe": string,
+        "contacts": contactsProfile
+        "lookingForAJob": true,
+        "lookingForAJobDescription": string,
+        "fullName": string,
+        "userId": number,
+        "photos": photosProfile
+    }
 }
 type MapDispatchType = {
     setUsersProfile: (profile: any) => void

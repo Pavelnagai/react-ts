@@ -1,39 +1,17 @@
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
 
-
 const ADD_POST = "ADD-POST"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
+const SET_USERS_PROFILE = "SET_USERS_PROFILE"
+
 export type PostPropsType = {
     id: string
     message: string
     likeCheck: number
 }
-// type contactsProfile = {
-//     "facebook": string,
-//     "website": null,
-//     "vk": string,
-//     "twitter": string,
-//     "instagram": string,
-//     "youtube": null,
-//     "github": string,
-//     "mainLink": null
-// }
-// type photosProfile = {
-//     "small": string,
-//     "large": string
-// }
-//
-// export type profilePropsType = {
-//     "aboutMe": string,
-//     "contacts": contactsProfile
-//     "lookingForAJob": true,
-//     "lookingForAJobDescription": string,
-//     "fullName": string,
-//     "userId": 2,
-//     "photos": photosProfile
-// }
 export type InitialStateProfileType = typeof initialState
+
 let initialState = {
     post: [
         {id: v1(), message: "Post 1", likeCheck: 12},
@@ -45,6 +23,7 @@ let initialState = {
     profile: null
 }
 type ActionType = addPostType | updatePostTextType | setUsersProfileType
+
 export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
     switch (action.type) {
         case ADD_POST:
@@ -58,14 +37,12 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
                 post: [...state.post, newPost],
                 newPost: ''
             }
-
-
         case UPDATE_POST_TEXT:
             return {
                 ...state,
                 newPost: action.newText
             }
-        case "SET_USERS_PROFILE":
+        case SET_USERS_PROFILE:
             return {
                 ...state,
                 profile: action.profile
@@ -74,23 +51,24 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
             return state
     }
 }
-type addPostType = ReturnType<typeof addPostAC>
+export type addPostType = ReturnType<typeof addPostAC>
+export type updatePostTextType = ReturnType<typeof updatePostTextAC>
+export type setUsersProfileType = ReturnType<typeof setUsersProfile>
+
 export const addPostAC = () => {
     return {
         type: ADD_POST
     } as const
 };
-type updatePostTextType = ReturnType<typeof updatePostTextAC>
 export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {
         type: UPDATE_POST_TEXT,
         newText: e.currentTarget.value
     } as const
 };
-type setUsersProfileType = ReturnType<typeof setUsersProfile>
 export const setUsersProfile = (profile: any) => {
     return {
-        type: 'SET_USERS_PROFILE',
+        type: SET_USERS_PROFILE,
         profile
     } as const
 }

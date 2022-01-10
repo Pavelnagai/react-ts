@@ -3,6 +3,7 @@ import {v1} from "uuid";
 
 const NEW_MESSAGE_BODY = "NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
+
 type DialogPropsType = {
     id: string
     name: string
@@ -52,13 +53,14 @@ export const dialogReducer = (state: InitialStateDialogType = initialState, acti
             return state
     }
 }
-type SendMessageType = ReturnType<typeof sendMessageCreate>
+export type SendMessageType = ReturnType<typeof sendMessageCreate>
+export type updateMessageType = ReturnType<typeof updateMessageTextAC>
+
 export const sendMessageCreate = () => {
     return {
         type: SEND_MESSAGE,
     } as const
 };
-type updateMessageType = ReturnType<typeof updateMessageTextAC>
 export const updateMessageTextAC = (body: string) => {
     return {
         type: NEW_MESSAGE_BODY,

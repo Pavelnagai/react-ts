@@ -1,19 +1,18 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store-redux";
-import {Dispatch} from "redux";
 import {
     follow,
     InitialStateUsersType,
     setCurrentPage,
+    setToggleFetching,
     setUsers,
-    setUsersTotalCount, setToggleFetching,
+    setUsersTotalCount,
     unFollow,
     UserPropsType
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
-import preloader from '../../assect/images/configPageLoader.gif'
 import Preloader from "../common/Preloader/Preloader";
 
 

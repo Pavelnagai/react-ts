@@ -9,6 +9,30 @@ export type PostPropsType = {
     message: string
     likeCheck: number
 }
+// type contactsProfile = {
+//     "facebook": string,
+//     "website": null,
+//     "vk": string,
+//     "twitter": string,
+//     "instagram": string,
+//     "youtube": null,
+//     "github": string,
+//     "mainLink": null
+// }
+// type photosProfile = {
+//     "small": string,
+//     "large": string
+// }
+//
+// export type profilePropsType = {
+//     "aboutMe": string,
+//     "contacts": contactsProfile
+//     "lookingForAJob": true,
+//     "lookingForAJobDescription": string,
+//     "fullName": string,
+//     "userId": 2,
+//     "photos": photosProfile
+// }
 export type InitialStateProfileType = typeof initialState
 let initialState = {
     post: [
@@ -17,9 +41,10 @@ let initialState = {
         {id: v1(), message: "Post 3", likeCheck: 11},
         {id: v1(), message: "Post 4", likeCheck: 19},
     ] as Array<PostPropsType>,
-    newPost: ''
+    newPost: '',
+    profile: null
 }
-type ActionType = addPostType | updatePostTextType
+type ActionType = addPostType | updatePostTextType | setUsersProfileType
 export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
     switch (action.type) {
         case ADD_POST:
@@ -40,6 +65,11 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
                 ...state,
                 newPost: action.newText
             }
+        case "SET_USERS_PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state
     }
@@ -57,3 +87,10 @@ export const updatePostTextAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
         newText: e.currentTarget.value
     } as const
 };
+type setUsersProfileType = ReturnType<typeof setUsersProfile>
+export const setUsersProfile = (profile: any) => {
+    return {
+        type: 'SET_USERS_PROFILE',
+        profile
+    } as const
+}

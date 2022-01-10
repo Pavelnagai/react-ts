@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./user.module.css";
 import image from "../../assect/images/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png";
 import {UserPropsType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     pageSize: number
@@ -32,7 +33,9 @@ const Users = (props: UsersPropsType) => {
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={'/profile/'}>
                         <img src={u.photos.small !== null ? u.photos.small : image} className={styles.userPhoto}/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed

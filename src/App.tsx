@@ -1,4 +1,3 @@
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import "./App.css"
 import {Route, Routes} from "react-router-dom";
@@ -9,13 +8,14 @@ import React from "react";
 import DialogsContainer from "./components/Navbar/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/Users-Container";
 import ProfileContainer from "./components/Navbar/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 export type AppPropsType = {}
 const App: React.FC<AppPropsType> = (props) => {
     return (
         <div className={"app-wrapper"}>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className={"app-wrapper-content"}>
                 <Routes>

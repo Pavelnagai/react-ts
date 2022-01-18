@@ -3,6 +3,7 @@ import styles from "./user.module.css";
 import image from "../../assect/images/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png";
 import {UserPropsType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     pageSize: number
@@ -33,19 +34,41 @@ const Users = (props: UsersPropsType) => {
             </div>
             {props.users.map(u => <div key={u.id}>
                 <span>
-                    <div >
-                        <NavLink  to={`/profile/${u.id}`}>
+                    <div>
+                        <NavLink to={`/profile/${u.id}`}>
                         <img src={u.photos.small !== null ? u.photos.small : image} className={styles.userPhoto}/>
                         </NavLink>
                     </div>
                     <div>
                         {u.followed
                             ? <button onClick={() => {
-                                props.follow(u.id)
-                            }}>follow</button>
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': '2a3c113a-9f81-44c2-8055-fcb19926514f',
+                                    }
+                                })
+                                    .then(responce => {
+                                        if (responce.data.resultCode === 0) {
+                                            props.follow(u.id)
+                                        }
+                                    })
+
+                            }}>Unfollow</button>
                             : <button onClick={() => {
-                                props.unFollow(u.id)
-                            }}>unFollow</button>}
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': '2a3c113a-9f81-44c2-8055-fcb19926514f',
+                                    }
+                                })
+                                    .then(responce => {
+                                        if (responce.data.resultCode === 0) {
+                                            props.unFollow(u.id)
+                                        }
+                                    })
+
+                            }}>follow</button>}
                     </div>
                 </span>
                 <span>

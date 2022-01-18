@@ -13,6 +13,8 @@ type UsersPropsType = {
     users: UserPropsType[]
     follow: (userID: string) => void
     unFollow: (userID: string) => void
+    setFollowingProgress: (isFetching: boolean, id: string) => void
+    followingInProgress: string[]
 }
 const Users = (props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
@@ -41,21 +43,25 @@ const Users = (props: UsersPropsType) => {
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.setFollowingProgress(true, u.id)
                                 UsersAPI.UnfollowUsers(u.id)
                                     .then(data => {
                                         if (data.resultCode === 0) {
                                             props.follow(u.id)
                                         }
+                                        props.setFollowingProgress(false, u.id)
                                     })
 
                             }}>Unfollow</button>
-                            : <button onClick={() => {
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.setFollowingProgress(true, u.id)
                                 UsersAPI.followUsers(u.id)
                                     .then(data => {
                                         if (data.resultCode === 0) {
                                             props.unFollow(u.id)
                                         }
+                                        props.setFollowingProgress(false, u.id)
                                     })
 
                             }}>follow</button>}

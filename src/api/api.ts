@@ -34,5 +34,10 @@ export const UsersAPI = {
                 return responce.data
             })
     },
-
+    profileApi(userId: string) {
+        return instans.get(`profile/${userId}`)
+            .then(response => {
+                return response.data
+            });
+    }
 }

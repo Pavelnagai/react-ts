@@ -5,7 +5,7 @@ import {PostType} from "./MyPostsContainer";
 
 const MyPosts = (props: PostType) => {
 
-    let postElement = props.post.map(p => <Post message={p.message} likeCheck={p.likeCheck}/>)
+    let postElement = props.post.map(p => <Post key={p.id} message={p.message} likeCheck={p.likeCheck}/>)
     let addPost = () => {
         props.addPostAC()
     }

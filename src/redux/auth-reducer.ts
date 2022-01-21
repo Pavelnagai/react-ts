@@ -1,3 +1,5 @@
+import {UsersAPI} from "../api/api";
+
 const SET_USER_DATA = "SET_USER_DATA"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
@@ -16,10 +18,11 @@ type ActionType = setAuthUser | ToggleFetchingType
 export const authReducer = (state: InitialStateDialogType = initialState, action: ActionType): InitialStateDialogType => {
     switch (action.type) {
         case SET_USER_DATA:
-         return {
-             ...state,
-             ...action.data,
-             isAuth: true,}
+            return {
+                ...state,
+                ...action.data,
+                isAuth: true,
+            }
         case TOGGLE_IS_FETCHING:
             return {
                 ...state,
@@ -31,7 +34,7 @@ export const authReducer = (state: InitialStateDialogType = initialState, action
 }
 export type setAuthUser = ReturnType<typeof setAuthUserData>
 
-export const setAuthUserData = (id: any, email:any, login:any) => {
+export const setAuthUserData = (id: any, email: any, login: any) => {
     return {
         type: SET_USER_DATA,
         data: {
@@ -47,4 +50,17 @@ export const setToggleFetching = (isFetching: boolean) => {
         type: TOGGLE_IS_FETCHING,
         isFetching
     } as const
+}
+export const loginUser = () => {
+    return (dispatch: any) => {
+        dispatch(setToggleFetching(true))
+        UsersAPI.loginAutorizUser()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, email, login} = data.data
+                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setToggleFetching(false))
+                }
+            });
+    }
 }

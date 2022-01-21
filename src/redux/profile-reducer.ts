@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
+import {UsersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
@@ -71,4 +72,17 @@ export const setUsersProfile = (profile: any) => {
         type: SET_USERS_PROFILE,
         profile
     } as const
+}
+
+export const profileUser = (ParamUserId: string) => {
+    return (dispatch: any) => {
+        let userId = ParamUserId;
+        if (!userId) {
+            userId = '2';
+        }
+        UsersAPI.profileApi(userId)
+            .then(data => {
+                dispatch(setUsersProfile(data))
+            })
+    }
 }

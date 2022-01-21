@@ -7,8 +7,8 @@ import {DialogType} from "./DialogsContainer";
 const Dialogs = (props: DialogType) => {
     let state = props.dialogPage
 
-    let dialogElements = state.dialog.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messageElement = state.message.map(m => <Message message={m.message}/>)
+    let dialogElements = state.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElement = state.message.map(m => <Message key={m.id} message={m.message}/>)
     let newMessageBody = state.newMessageBody
 
     const onSendMessageClick = () => {

@@ -3,7 +3,6 @@ import styles from "./user.module.css";
 import image from "../../assect/images/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png";
 import {UserPropsType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {UsersAPI} from "../../api/api";
 
 type UsersPropsType = {
     pageSize: number
@@ -43,28 +42,14 @@ const Users = (props: UsersPropsType) => {
                     </div>
                     <div>
                         {u.followed
-                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.setFollowingProgress(true, u.id)
-                                UsersAPI.UnfollowUsers(u.id)
-                                    .then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.follow(u.id)
-                                        }
-                                        props.setFollowingProgress(false, u.id)
-                                    })
-
-                            }}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.setFollowingProgress(true, u.id)
-                                UsersAPI.followUsers(u.id)
-                                    .then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.unFollow(u.id)
-                                        }
-                                        props.setFollowingProgress(false, u.id)
-                                    })
-
-                            }}>follow</button>}
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => {
+                                          props.unFollow(u.id)
+                                      }}>Unfollow</button>
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => {
+                                          props.follow(u.id)
+                                      }}>Follow</button>}
                     </div>
                 </span>
                 <span>

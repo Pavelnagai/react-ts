@@ -74,12 +74,8 @@ export const setUsersProfile = (profile: any) => {
     } as const
 }
 
-export const profileUser = (ParamUserId: string) => {
+export const profileUser = (userId: string) => {
     return (dispatch: any) => {
-        let userId = ParamUserId;
-        if (!userId) {
-            userId = '2';
-        }
         UsersAPI.profileApi(userId)
             .then(data => {
                 dispatch(setUsersProfile(data))

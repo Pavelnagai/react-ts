@@ -9,6 +9,7 @@ import DialogsContainer from "./components/Navbar/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/Users-Container";
 import ProfileContainer from "./components/Navbar/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 export type AppPropsType = {}
@@ -28,6 +29,7 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path='/settings' element={<Settings/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/users' element={<UserContainer/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </div>
         </div>

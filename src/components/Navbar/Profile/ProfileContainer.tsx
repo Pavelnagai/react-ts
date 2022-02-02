@@ -1,10 +1,11 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import Profile from "./Profile";
 import {connect} from 'react-redux';
 import {useParams} from "react-router-dom";
 import {profileUser} from "../../../redux/profile-reducer";
 import {AppStateType} from "../../../redux/store-redux";
 import {WIthAuthRedirect} from "../../common/hoc/WIthAuthRedirect";
+import {compose} from "redux";
 
 const withRouter = (WrappedComponent: any) => (props: any) => {
     const params = useParams();
@@ -38,9 +39,9 @@ let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
 });
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
-
-export default WIthAuthRedirect(connect(mapStateToProps, {profileUser})(WithUrlDataContainerComponent));
-
-
+export default compose<ComponentType>(
+    connect(mapStateToProps, {profileUser}),
+    withRouter,
+    WIthAuthRedirect
+)(ProfileContainer)
 

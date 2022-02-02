@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store-redux";
 import {
@@ -11,6 +11,8 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {WIthAuthRedirect} from "../common/hoc/WIthAuthRedirect";
+import {compose} from 'redux';
 
 
 class UsersContainer extends React.Component<UsersPropsType, any> {
@@ -36,7 +38,7 @@ class UsersContainer extends React.Component<UsersPropsType, any> {
                 unFollow={this.props.unFollow}
                 pageSize={this.props.pageSize}
                 totalUserCount={this.props.totalUserCount}
-                setFollowingProgress ={this.props.setFollowingProgress}
+                setFollowingProgress={this.props.setFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -72,11 +74,13 @@ let mapStateToProps = (state: AppStateType): MapStateType => {
 
 }
 
-const UserContainer = connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setCurrentPage,
-    setFollowingProgress,
-    getUser,
-})(UsersContainer)
-export default UserContainer
+export default compose<ComponentType>(
+    connect(mapStateToProps, {
+        follow,
+        unFollow,
+        setCurrentPage,
+        setFollowingProgress,
+        getUser,
+    }),
+    WIthAuthRedirect
+)(UsersContainer)

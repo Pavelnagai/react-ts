@@ -16,7 +16,7 @@ const Dialogs = (props: DialogType) => {
     }
     const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
-        props.updateMessageText(body)
+        props.updateMessageTextAC(body)
     }
     return (
         <div className={s.fullDialogs}>

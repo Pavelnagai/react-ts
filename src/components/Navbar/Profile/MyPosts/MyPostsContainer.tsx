@@ -3,7 +3,6 @@ import {addPostAC, PostPropsType, updatePostTextAC} from "../../../../redux/prof
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../redux/store-redux";
-import {Dispatch} from "redux";
 
 type MapStateType = {
     post: Array<PostPropsType>,
@@ -21,16 +20,5 @@ let mapStateToProps = (state: AppStateType): MapStateType => {
         newPost: state.profilePage.newPost
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        addPostAC: () => {
-            dispatch(addPostAC())
-        },
-        updatePostTextAC: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            let action = updatePostTextAC(e)
-            dispatch(action)
-        }
-    }
-}
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, {addPostAC, updatePostTextAC})(MyPosts)
 export default MyPostsContainer

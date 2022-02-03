@@ -11,7 +11,7 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {WIthAuthRedirect} from "../common/hoc/WIthAuthRedirect";
+import {WithAuthRedirect} from "../common/hoc/WIthAuthRedirect";
 import {compose} from 'redux';
 
 
@@ -82,5 +82,5 @@ export default compose<ComponentType>(
         setFollowingProgress,
         getUser,
     }),
-    WIthAuthRedirect
+    WithAuthRedirect
 )(UsersContainer)

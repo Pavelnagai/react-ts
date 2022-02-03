@@ -1,6 +1,5 @@
 import {v1} from "uuid";
 
-
 const NEW_MESSAGE_BODY = "NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
 

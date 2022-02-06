@@ -1,10 +1,11 @@
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
-import {UsersAPI} from "../api/api";
+import {profileAPI, UsersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
 const SET_USERS_PROFILE = "SET_USERS_PROFILE"
+const SET_STATUS = "SET_STATUS"
 
 export type PostPropsType = {
     id: string
@@ -21,9 +22,10 @@ let initialState = {
         {id: v1(), message: "Post 4", likeCheck: 19},
     ] as Array<PostPropsType>,
     newPost: '',
-    profile: null
+    profile: null,
+    status: ''
 }
-type ActionType = addPostType | updatePostTextType | setUsersProfileType
+type ActionType = addPostType | updatePostTextType | setUsersProfileType | setStatusType
 
 export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
     switch (action.type) {
@@ -48,6 +50,11 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
                 ...state,
                 profile: action.profile
             }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.payload.status
+            }
         default:
             return state
     }
@@ -55,7 +62,7 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
 export type addPostType = ReturnType<typeof addPostAC>
 export type updatePostTextType = ReturnType<typeof updatePostTextAC>
 export type setUsersProfileType = ReturnType<typeof setUsersProfile>
-
+type setStatusType = ReturnType<typeof setStatus>
 export const addPostAC = () => {
     return {
         type: ADD_POST
@@ -74,11 +81,40 @@ export const setUsersProfile = (profile: any) => {
     } as const
 }
 
+export const setStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        payload: {
+            status
+        }
+    } as const
+}
 export const profileUser = (userId: string) => {
     return (dispatch: any) => {
-        UsersAPI.profileApi(userId)
-            .then(data => {
-                dispatch(setUsersProfile(data))
+        profileAPI.getProfile(userId)
+            .then(res => {
+                dispatch(setUsersProfile(res.data))
+            })
+    }
+}
+export const getStatus = (userId: string) => {
+    return (dispatch: any) => {
+        profileAPI.getStatus(userId)
+            .then(res => {
+                dispatch(setStatus(res.data))
+            })
+    }
+}
+export const updateStatus = (status: string) => {
+    return (dispatch: any) => {
+        profileAPI.updateStatus(status)
+            .then(res => {
+               if(res.data.resultCode === 0) {
+                   dispatch(setStatus(status))
+               }
+            })
+            .catch(rej => {
+                console.log('warning updateStatus')
             })
     }
 }

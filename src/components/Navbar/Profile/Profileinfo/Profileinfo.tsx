@@ -5,6 +5,8 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoProps = {
     profile: any
+    status: string
+    updateStatus: any
 }
 const ProfileInfo = (props: ProfileInfoProps) => {
     if (!props.profile) {
@@ -15,7 +17,7 @@ const ProfileInfo = (props: ProfileInfoProps) => {
             <div className={s.avatar}>
                 <img
                     src={'https://sun9-60.userapi.com/impg/yGONFffVpZ67ooAuvh9HaHshlK4-pIOjRtBRGA/-nwhVOuxA6g.jpg?size=1066x1600&quality=96&sign=1376f9a53cd4bfd30dc0040b1d037514&type=album'}/>
-                <ProfileStatus status={'Hello Paul'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
             <div>
                 <img src={props.profile.photos.large}/>

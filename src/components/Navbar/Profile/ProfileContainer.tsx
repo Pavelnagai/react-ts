@@ -1,25 +1,15 @@
 import React, {ComponentType} from "react";
 import Profile from "./Profile";
 import {connect} from 'react-redux';
-import {useParams} from "react-router-dom";
 import {getStatus, profileUser, updateStatus} from "../../../redux/profile-reducer";
 import {AppStateType} from "../../../redux/store-redux";
 import {WithAuthRedirect} from "../../common/hoc/WIthAuthRedirect";
 import {compose} from "redux";
-
-const withRouter = (WrappedComponent: any) => (props: any) => {
-    const params = useParams();
-    return (
-        <WrappedComponent
-            {...props}
-            params={params}
-        />
-    );
-};
+import {withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component<any, any> {
     componentDidMount() {
-        let userId = this.props.params.userId;
+        let userId = this.props.match.params.userId;
         if (!userId) {
             userId = '21673';
         }
@@ -29,7 +19,8 @@ class ProfileContainer extends React.Component<any, any> {
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }

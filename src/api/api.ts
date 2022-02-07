@@ -47,10 +47,10 @@ export const profileAPI = {
     getProfile(userId: string) {
         return instans.get(`profile/${userId}`)
     },
-    getStatus(userId: string){
+    getStatus(userId: string) {
         return instans.get(`profile/status/${userId}`)
     },
-    updateStatus (status: string) {
+    updateStatus(status: string) {
         return instans.put(`profile/status`, {status})
     }
 

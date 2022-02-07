@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar/Navbar";
 import "./App.css"
-import {Route, Routes} from "react-router-dom";
+import {Route} from "react-router-dom";
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
 import Music from "./components/Navbar/Music/Music";
@@ -19,18 +19,17 @@ const App: React.FC<AppPropsType> = (props) => {
             <HeaderContainer/>
             <Navbar/>
             <div className={"app-wrapper-content"}>
-                <Routes>
-                    <Route path="/profile" element={<ProfileContainer/>}>
-                        <Route path=":userId" element={<ProfileContainer/>}/>
-                    </Route>
-                    {/*<Route path='/profile/:userId?' element={<ProfileContainer/>}/>*/}
-                    <Route path='/dialogs' element={<DialogsContainer/>}/>
-                    <Route path='/news' element={<News/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
-                    <Route path='/music' element={<Music/>}/>
-                    <Route path='/users' element={<UserContainer/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                </Routes>
+                {/*// react-router-dom v6*/}
+                {/*<Route path="/profile" component={<ProfileContainer/>}>*/}
+                {/*    <Route path=":userId" component={<ProfileContainer/>}/>*/}
+                {/*</Route>*/}
+                <Route path='/profile/:userId?' component={ProfileContainer}/>
+                <Route path='/dialogs' component={DialogsContainer}/>
+                <Route path='/news' component={News}/>
+                <Route path='/settings' component={Settings}/>
+                <Route path='/music' component={Music}/>
+                <Route path='/users' component={UserContainer}/>
+                <Route path='/login' component={Login}/>
             </div>
         </div>
     )

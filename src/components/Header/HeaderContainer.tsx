@@ -11,7 +11,7 @@ class HeaderContainer extends React.Component<any, any> {
     }
 
     render() {
-        return <Header {...this.props}/>
+        return <Header isAuth={this.props.isAuth} login={this.props.login}/>
     }
 }
 
@@ -20,4 +20,6 @@ const MapStateToProps = (state: AppStateType) => ({
     login: state.auth.login,
 })
 
-export default connect(MapStateToProps, {setAuthUserData, setToggleFetching, loginUser})(HeaderContainer)
+export default connect(MapStateToProps,
+    {setAuthUserData, setToggleFetching, loginUser})
+(HeaderContainer)

@@ -1,24 +1,19 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import classn from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostType} from "./MyPostsContainer";
+import {AddPostForm, FormDataPostType} from './Post/MyPostForm';
 
 const MyPosts = (props: PostType) => {
 
     let postElement = props.post.map(p => <Post key={p.id} message={p.message} likeCheck={p.likeCheck}/>)
-    let addPost = () => {
-        props.addPostAC()
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updatePostTextAC(e)
+
+    const addPostHandler = (values: FormDataPostType) => {
+        props.addPostAC(values.post)
     }
     return (
         <div className={classn.item}>
-            <div className={classn.button}>
-                <textarea value={props.newPost}
-                          onChange={onChangeHandler}/>
-                <button onClick={addPost}>Save</button>
-            </div>
+            <AddPostForm onSubmit={addPostHandler}/>
             <div>
                 <h3>My Posts</h3>
             </div>
@@ -27,3 +22,6 @@ const MyPosts = (props: PostType) => {
     )
 }
 export default MyPosts
+
+
+

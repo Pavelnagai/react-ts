@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {addPostAC, profileReducer, updatePostTextAC} from "./profile-reducer";
+import {addPostAC, profileReducer} from "./profile-reducer";
 import {dialogReducer, sendMessageCreate, updateMessageTextAC} from "./dialog-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 

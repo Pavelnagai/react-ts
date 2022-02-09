@@ -1,23 +1,20 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogType} from "./DialogsContainer";
+import {AddDialogForm, DialogDataFormType} from "./DialogForm";
 
 const Dialogs = (props: DialogType) => {
     let state = props.dialogPage
 
     let dialogElements = state.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messageElement = state.message.map(m => <Message key={m.id} message={m.message}/>)
-    let newMessageBody = state.newMessageBody
 
-    const onSendMessageClick = () => {
-        props.sendMessageCreate()
+    const addMessage = (value: DialogDataFormType) => {
+        props.sendMessageCreate(value.newMessageBody)
     }
-    const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.updateMessageTextAC(body)
-    }
+
     return (
         <div className={s.fullDialogs}>
             <div className={s.dialogs}>
@@ -28,9 +25,10 @@ const Dialogs = (props: DialogType) => {
                     {messageElement}
                 </div>
             </div>
-            <textarea value={newMessageBody} onChange={onChangeTextArea}/>
-            <button className={s.buttonSend} onClick={onSendMessageClick}>send</button>
+            <AddDialogForm onSubmit={addMessage}/>
         </div>
     )
 }
 export default Dialogs
+
+

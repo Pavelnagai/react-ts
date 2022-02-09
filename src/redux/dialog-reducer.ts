@@ -1,6 +1,5 @@
 import {v1} from "uuid";
 
-const NEW_MESSAGE_BODY = "NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
 
 type DialogPropsType = {
@@ -30,21 +29,14 @@ let initialState = {
         {id: v1(), message: "Meat year"},
         {id: v1(), message: "David boy"}
     ] as Array<MessagePropsType>,
-    newMessageBody: ''
 };
-type ActionType = SendMessageType | updateMessageType
+type ActionType = SendMessageType
 export const dialogReducer = (state: InitialStateDialogType = initialState, action: ActionType): InitialStateDialogType => {
     switch (action.type) {
-        case NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            }
         case SEND_MESSAGE : {
-            let body = state.newMessageBody
+            let body = action.payload.newMessageBody
             return {
                 ...state,
-                newMessageBody: "",
                 message: [...state.message, {id: v1(), message: body}]
             }
         }
@@ -52,17 +44,13 @@ export const dialogReducer = (state: InitialStateDialogType = initialState, acti
             return state
     }
 }
-export type SendMessageType = ReturnType<typeof sendMessageCreate>
-export type updateMessageType = ReturnType<typeof updateMessageTextAC>
 
-export const sendMessageCreate = () => {
+export type SendMessageType = ReturnType<typeof sendMessageCreate>
+export const sendMessageCreate = (newMessageBody: string) => {
     return {
         type: SEND_MESSAGE,
-    } as const
-};
-export const updateMessageTextAC = (body: string) => {
-    return {
-        type: NEW_MESSAGE_BODY,
-        body: body
+        payload: {
+            newMessageBody
+        }
     } as const
 };

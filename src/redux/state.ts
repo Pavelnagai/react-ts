@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {addPostAC, profileReducer} from "./profile-reducer";
-import {dialogReducer, sendMessageCreate, updateMessageTextAC} from "./dialog-reducer";
+import {dialogReducer, sendMessageCreate} from "./dialog-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
 // type StoreType = {

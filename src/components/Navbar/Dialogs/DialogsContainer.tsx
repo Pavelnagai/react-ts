@@ -1,9 +1,9 @@
 import React, {ComponentType} from "react";
-import {InitialStateDialogType, sendMessageCreate, updateMessageTextAC} from "../../../redux/dialog-reducer";
+import {InitialStateDialogType, sendMessageCreate} from "../../../redux/dialog-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/store-redux";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import {WithAuthRedirect} from "../../common/hoc/WIthAuthRedirect";
 
 type MapStateType = {
@@ -11,9 +11,9 @@ type MapStateType = {
     isAuth: any
 }
 type MapDispatchType = {
-    updateMessageTextAC: (body: string) => void,
-    sendMessageCreate: () => void
+    sendMessageCreate: (newMessageBody: string) => void
 }
+
 export type DialogType = MapStateType & MapDispatchType
 let mapStateToProps = (state: AppStateType): MapStateType => {
     return {
@@ -23,6 +23,6 @@ let mapStateToProps = (state: AppStateType): MapStateType => {
 }
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {updateMessageTextAC, sendMessageCreate}),
+    connect(mapStateToProps, {sendMessageCreate}),
     WithAuthRedirect
 )(Dialogs)

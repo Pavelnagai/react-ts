@@ -19,10 +19,6 @@ const App: React.FC<AppPropsType> = (props) => {
             <HeaderContainer/>
             <Navbar/>
             <div className={"app-wrapper-content"}>
-                {/*// react-router-dom v6*/}
-                {/*<Route path="/profile" component={<ProfileContainer/>}>*/}
-                {/*    <Route path=":userId" component={<ProfileContainer/>}/>*/}
-                {/*</Route>*/}
                 <Route path='/profile/:userId?' component={ProfileContainer}/>
                 <Route path='/dialogs' component={DialogsContainer}/>
                 <Route path='/news' component={News}/>

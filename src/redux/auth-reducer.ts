@@ -21,8 +21,8 @@ export const authReducer = (state: InitialStateDialogType = initialState, action
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true,
+                ...action.payload,
+                // isAuth: true,
             }
 
         case TOGGLE_IS_FETCHING:
@@ -37,11 +37,11 @@ export const authReducer = (state: InitialStateDialogType = initialState, action
 }
 export type setAuthUser = ReturnType<typeof setAuthUserData>
 
-export const setAuthUserData = (id: any, email: any, login: any) => {
+export const setAuthUserData = (id: any, email: any, login: any, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
-        data: {
-            id, email, login
+        payload: {
+            id, email, login, isAuth
         }
     } as const
 };
@@ -55,16 +55,44 @@ export const setToggleFetching = (isFetching: boolean) => {
     } as const
 }
 
-export const loginUser = () => {
+export const getAuthUserData = () => {
     return (dispatch: any) => {
         dispatch(setToggleFetching(true))
         AuthAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserData(id, email, login, true))
                     dispatch(setToggleFetching(false))
                 }
             });
     }
 }
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: any) => {
+        dispatch(setToggleFetching(true))
+        AuthAPI.login(email, password, rememberMe)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                    dispatch(setToggleFetching(false))
+                }
+            });
+    }
+}
+
+export const logout = () => {
+    return (dispatch: any) => {
+        dispatch(setToggleFetching(true))
+        AuthAPI.logout()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setAuthUserData(null, null, null, false))
+                    dispatch(setToggleFetching(false))
+                }
+
+            });
+    }
+}
+

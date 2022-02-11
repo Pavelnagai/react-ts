@@ -1,17 +1,20 @@
 import React from 'react';
 import Header from "./Header";
-import {loginUser, setAuthUserData, setToggleFetching} from "../../redux/auth-reducer";
+import { logout, setAuthUserData, setToggleFetching} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store-redux";
+import {getAuthUserData} from "../../redux/auth-reducer";
 
 
 class HeaderContainer extends React.Component<any, any> {
     componentDidMount() {
-        this.props.loginUser()
+        this.props.getAuthUserData()
     }
 
     render() {
-        return <Header isAuth={this.props.isAuth} login={this.props.login}/>
+        return <Header {...this.props}
+            // logout={logout} isAuth={this.props.isAuth} login={this.props.login}
+        />
     }
 }
 
@@ -21,5 +24,5 @@ const MapStateToProps = (state: AppStateType) => ({
 })
 
 export default connect(MapStateToProps,
-    {setAuthUserData, setToggleFetching, loginUser})
+    {logout, setAuthUserData, setToggleFetching, getAuthUserData})
 (HeaderContainer)

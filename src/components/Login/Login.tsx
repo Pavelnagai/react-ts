@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/store-redux";
 import {Redirect} from "react-router-dom";
+import style from '../common/FormControls/FormControls.module.css'
 
 type FormDataType = {
     email: string,
@@ -20,11 +21,15 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field placeholder={'Email'} name={'email'} component={Input} validate={[required, maxLength30]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} type={'password'} component={Input} validate={[required, maxLength30]}/>
+                <Field placeholder={'Password'} name={'password'} type={'password'} component={Input}
+                       validate={[required, maxLength30]}/>
             </div>
             <div>
                 <Field name={'rememberMe'} type={'checkbox'} component={Input}/>
             </div>
+            {props.error && <div className={style.formSummaryError}>
+                {props.error}
+            </div>}
             <button>login</button>
         </form>
     )
@@ -55,4 +60,4 @@ const mapStateToProps = (state: AppStateType) => {
         isAuth: state.auth.isAuth
     }
 }
-export default connect( mapStateToProps, {login}) (Login);
+export default connect(mapStateToProps, {login})(Login);

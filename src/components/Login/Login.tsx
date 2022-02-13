@@ -1,49 +1,14 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/FormControls/FormControls";
-import {maxLength, required} from "../../utilits/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/store-redux";
 import {Redirect} from "react-router-dom";
-import style from '../common/FormControls/FormControls.module.css'
-
-type FormDataType = {
-    email: string,
-    password: string,
-    rememberMe: boolean
-}
-const maxLength30 = maxLength(30)
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Email'} name={'email'} component={Input} validate={[required, maxLength30]}/>
-            </div>
-            <div>
-                <Field placeholder={'Password'} name={'password'} type={'password'} component={Input}
-                       validate={[required, maxLength30]}/>
-            </div>
-            <div>
-                <Field name={'rememberMe'} type={'checkbox'} component={Input}/>
-            </div>
-            {props.error && <div className={style.formSummaryError}>
-                {props.error}
-            </div>}
-            <button>login</button>
-        </form>
-    )
-}
-
-const LoginReduxForm = reduxForm<FormDataType>({
-    form: 'Email'
-})(LoginForm)
+import {FormDataType, LoginReduxForm} from './LoginForm';
 
 
 const Login = (props: any) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
-        console.log(formData)
     }
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>

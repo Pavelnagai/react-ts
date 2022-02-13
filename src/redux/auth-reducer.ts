@@ -12,8 +12,7 @@ let initialState = {
     email: null,
     login: null,
     isAuth: false,
-    isFetching: false
-
+    isFetching: false,
 };
 
 type ActionType = setAuthUser | ToggleFetchingType
@@ -23,7 +22,6 @@ export const authReducer = (state: InitialStateDialogType = initialState, action
             return {
                 ...state,
                 ...action.payload,
-                // isAuth: true,
             }
 
         case TOGGLE_IS_FETCHING:
@@ -60,9 +58,9 @@ export const getAuthUserData = () => {
     return (dispatch: any) => {
         dispatch(setToggleFetching(true))
         AuthAPI.me()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    let {id, email, login} = res.data.data
                     dispatch(setAuthUserData(id, email, login, true))
                     dispatch(setToggleFetching(false))
                 }

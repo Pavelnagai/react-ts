@@ -156,10 +156,10 @@ export const getUser = (currentPage: number, pageSize: number) => {
     return (dispatch: any) => {
         dispatch(setToggleFetching(true))
         UsersAPI.getUsers(currentPage, pageSize)
-            .then(data => {
+            .then(res => {
                 dispatch(setToggleFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setUsersTotalCount(data.totalCount))
+                dispatch(setUsers(res.data.items))
+                dispatch(setUsersTotalCount(res.data.totalCount))
             })
     }
 }
@@ -167,8 +167,8 @@ export const unFollow = (userId: string) => {
     return (dispatch: any) => {
         dispatch(setFollowingProgress(true, userId))
         FollowingAPI.UnfollowUsers(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
+            .then(res => {
+                if (res.data.resultCode === 0) {
                     dispatch(unFollowSuccess(userId))
                 }
                 dispatch(setFollowingProgress(false, userId))
@@ -179,8 +179,8 @@ export const follow = (userId: string) => {
     return (dispatch: any) => {
         dispatch(setFollowingProgress(true, userId))
         FollowingAPI.followUsers(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
+            .then(res => {
+                if (res.data.resultCode === 0) {
                     dispatch(followSuccess(userId))
                 }
                 dispatch(setFollowingProgress(false, userId))

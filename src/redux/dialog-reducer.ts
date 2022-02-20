@@ -25,7 +25,7 @@ let initialState = {
         {id: v1(), message: "Hy"},
         {id: v1(), message: "Hello dad"},
         {id: v1(), message: "Your good friends"},
-        {id: v1(), message: "Anna good girl"},
+        {id: v1(), message: "I`ll be back"},
         {id: v1(), message: "Meat year"},
         {id: v1(), message: "David boy"}
     ] as Array<MessagePropsType>,

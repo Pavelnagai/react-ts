@@ -25,7 +25,10 @@ const Dialogs = (props: DialogType) => {
                     {messageElement}
                 </div>
             </div>
-            <AddDialogForm onSubmit={addMessage}/>
+            <div className={s.dialogTextArea}>
+                <AddDialogForm onSubmit={addMessage}/>
+            </div>
+
         </div>
     )
 }

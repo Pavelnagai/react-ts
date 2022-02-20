@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/social_network/static/css/main.28df2208.css",
-    "main.js": "/social_network/static/js/main.310f1889.js",
+    "main.css": "/social_network/static/css/main.44592b40.css",
+    "main.js": "/social_network/static/js/main.7c8da785.js",
     "static/js/787.cfd8f164.chunk.js": "/social_network/static/js/787.cfd8f164.chunk.js",
     "static/media/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png": "/social_network/static/media/114-1149878_setting-user-avatar-in-specific-size-without-breaking.be2959bfcfaeee682f4f.png",
     "static/media/configPageLoader.gif": "/social_network/static/media/configPageLoader.dbec4b87547290bb4b44.gif",
     "index.html": "/social_network/index.html",
-    "main.28df2208.css.map": "/social_network/static/css/main.28df2208.css.map",
-    "main.310f1889.js.map": "/social_network/static/js/main.310f1889.js.map",
+    "main.44592b40.css.map": "/social_network/static/css/main.44592b40.css.map",
+    "main.7c8da785.js.map": "/social_network/static/js/main.7c8da785.js.map",
     "787.cfd8f164.chunk.js.map": "/social_network/static/js/787.cfd8f164.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.28df2208.css",
-    "static/js/main.310f1889.js"
+    "static/css/main.44592b40.css",
+    "static/js/main.7c8da785.js"
   ]
 }

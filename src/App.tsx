@@ -15,6 +15,7 @@ import {AppStateType} from "./redux/store-redux";
 import {initializedApp} from "./redux/app.reducer";
 import {compose} from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
+import PrimarySearchAppBar from "./Bar";
 
 
 export type AppPropsType = {}
@@ -30,16 +31,23 @@ class App extends React.Component<any, any> {
         }
         return (
             <div className={"app-wrapper"}>
-                <HeaderContainer/>
-                <Navbar/>
-                <div className={"app-wrapper-content"}>
-                    <Route path='/profile/:userId?' component={ProfileContainer}/>
-                    <Route path='/dialogs' component={DialogsContainer}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/settings' component={Settings}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/users' component={UserContainer}/>
-                    <Route path='/login' component={Login}/>
+                <div className={'header'}>
+                    <PrimarySearchAppBar/>
+                    {/*<HeaderContainer/>*/}
+                </div>
+                <div className={'content'}>
+                    <div className={'navBar'}>
+                        <Navbar/>
+                    </div>
+                    <div className={"app-wrapper-content"}>
+                        <Route path='/profile/:userId?' component={ProfileContainer}/>
+                        <Route path='/dialogs' component={DialogsContainer}/>
+                        <Route path='/news' component={News}/>
+                        <Route path='/settings' component={Settings}/>
+                        <Route path='/music' component={Music}/>
+                        <Route path='/users' component={UserContainer}/>
+                        <Route path='/login' component={Login}/>
+                    </div>
                 </div>
             </div>
         )

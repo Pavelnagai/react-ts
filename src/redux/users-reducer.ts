@@ -30,7 +30,7 @@ export type InitialStateUsersType = {
 }
 let initialState: InitialStateUsersType = {
     users: [],
-    pageSize: 50,
+    pageSize: 15,
     totalUserCount: 0,
     currentPage: 1,
     isFetching: true,

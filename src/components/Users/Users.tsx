@@ -4,6 +4,7 @@ import image from "../../assect/images/114-1149878_setting-user-avatar-in-specif
 import {UserPropsType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 
+
 type UsersPropsType = {
     pageSize: number
     totalUserCount: number
@@ -16,6 +17,12 @@ type UsersPropsType = {
     followingInProgress: string[]
 }
 const Users = (props: UsersPropsType) => {
+    // const [pageSize, setPageSize] = React.useState<number>(5);
+    // // const { data } = useDemoData({
+    // //     dataSet: 'Commodity',
+    // //     rowLength: 100,
+    // //     maxColumns: 6,
+    // // });
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -23,16 +30,6 @@ const Users = (props: UsersPropsType) => {
     }
     return (
         <div>
-            <div>
-                {pages.map((el, i) => {
-                    return <span
-                        key={i}
-                        className={props.currentPage === el ? styles.selectedPage : ''}
-                        onClick={() => {
-                            props.onPageChanged(el)
-                        }}> {el} </span>
-                })}
-            </div>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
@@ -63,6 +60,23 @@ const Users = (props: UsersPropsType) => {
                     </span>
                 </span>
             </div>)}
+            <div>
+                {/*<DataGrid*/}
+                {/*    pageSize={pageSize}*/}
+                {/*    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}*/}
+                {/*    rowsPerPageOptions={[5, 10, 20]}*/}
+                {/*    pagination*/}
+                {/*    {...data}*/}
+                {/*/>*/}
+                {pages.map((el, i) => {
+                    return <span
+                        key={i}
+                        className={props.currentPage === el ? styles.selectedPage : ''}
+                        onClick={() => {
+                            props.onPageChanged(el)
+                        }}> {el} </span>
+                })}
+            </div>
         </div>
     );
 };

@@ -10,7 +10,6 @@ import {
     unFollow
 } from "../../redux/users-reducer";
 import Users from "./Users";
-import Preloader from "../common/Preloader/Preloader";
 import {WithAuthRedirect} from "../common/hoc/WIthAuthRedirect";
 import {compose} from 'redux';
 import {
@@ -21,6 +20,7 @@ import {
     getTotalUserCount,
     getUsers
 } from '../../redux/users-selectors';
+import {LinearProgress} from "@mui/material";
 
 
 class UsersContainer extends React.Component<UsersPropsType, any> {
@@ -36,7 +36,7 @@ class UsersContainer extends React.Component<UsersPropsType, any> {
     render() {
         return <>
             {this.props.userPage.isFetching
-                ? <Preloader/>
+                    ? <LinearProgress />
                 : null}
             <Users
                 users={this.props.userPage.users}

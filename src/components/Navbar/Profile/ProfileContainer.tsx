@@ -6,7 +6,7 @@ import {AppStateType} from "../../../redux/store-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 
-class ProfileContainer extends React.Component<any, any> {
+class ProfileContainer extends React.PureComponent<any, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {

@@ -5,7 +5,7 @@ type PostPropsType = {
     message: string
     likeCheck: number
 }
-const Post = (props: PostPropsType) => {
+const Post = React.memo((props: PostPropsType) => {
     return (
         <div>
             <div className={classn.item}>
@@ -17,5 +17,5 @@ const Post = (props: PostPropsType) => {
         </div>
 
     )
-}
+})
 export default Post

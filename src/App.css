@@ -4,6 +4,7 @@
 }
 
 .header {
+    width: 100%;
     position: sticky;
     top: 0;
 }
@@ -12,18 +13,16 @@
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 900px;
-
+    width: 80%;
 }
 
 .navBar {
     background-color: rgba(238, 238, 230, 0.79);
-    width: 200px;
-
+    width: 30%;
 }
 
 .app-wrapper-content {
-    width: 700px;
+    width: 80%;
     padding: 20px;
     background-color: rgba(2, 1, 1, 0.36);
     min-height: 86vh;

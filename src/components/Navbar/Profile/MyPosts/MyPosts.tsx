@@ -4,7 +4,7 @@ import Post from "./Post/Post";
 import {PostType} from "./MyPostsContainer";
 import {AddPostForm, FormDataPostType} from './Post/MyPostForm';
 
-const MyPosts = (props: PostType) => {
+const MyPosts = React.memo((props: PostType) => {
 
     let postElement = props.post.map(p => <Post key={p.id} message={p.message} likeCheck={p.likeCheck}/>)
 
@@ -20,7 +20,7 @@ const MyPosts = (props: PostType) => {
             {postElement}
         </div>
     )
-}
+})
 export default MyPosts
 
 

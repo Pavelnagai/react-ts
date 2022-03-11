@@ -17,12 +17,6 @@ type UsersPropsType = {
     followingInProgress: string[]
 }
 const Users = (props: UsersPropsType) => {
-    // const [pageSize, setPageSize] = React.useState<number>(5);
-    // // const { data } = useDemoData({
-    // //     dataSet: 'Commodity',
-    // //     rowLength: 100,
-    // //     maxColumns: 6,
-    // // });
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {

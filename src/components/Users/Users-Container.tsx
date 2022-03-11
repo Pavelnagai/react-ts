@@ -23,7 +23,7 @@ import {
 import {LinearProgress} from "@mui/material";
 
 
-class UsersContainer extends React.Component<UsersPropsType, any> {
+class UsersContainer extends React.PureComponent<UsersPropsType, any> {
     componentDidMount() {
         this.props.getUser(this.props.currentPage, this.props.pageSize)
     }

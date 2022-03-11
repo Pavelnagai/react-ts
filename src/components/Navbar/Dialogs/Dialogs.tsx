@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import {DialogType} from "./DialogsContainer";
 import {AddDialogForm, DialogDataFormType} from "./DialogForm";
 
-const Dialogs = (props: DialogType) => {
+const Dialogs = React.memo((props: DialogType) => {
     let state = props.dialogPage
 
     let dialogElements = state.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
@@ -31,7 +31,7 @@ const Dialogs = (props: DialogType) => {
 
         </div>
     )
-}
+})
 export default Dialogs
 
 

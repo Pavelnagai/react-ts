@@ -4,6 +4,7 @@ import {profileAPI} from "../api/api";
 const ADD_POST = "ADD-POST"
 const SET_USERS_PROFILE = "SET_USERS_PROFILE"
 const SET_STATUS = "SET_STATUS"
+const DELETE_POST = "DELETE_POST"
 
 export type PostPropsType = {
     id: string
@@ -22,7 +23,7 @@ let initialState = {
     profile: null,
     status: ''
 }
-type ActionType = addPostType | setUsersProfileType | setStatusType
+type ActionType = AddPostType | SetUsersProfileType | SetStatusType | DeletePostType
 
 export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
     switch (action.type) {
@@ -46,13 +47,19 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
                 ...state,
                 status: action.payload.status
             }
+        case "DELETE_POST":
+            return {
+                ...state,
+                post: state.post.filter(el => el.id !== action.payload.userId)
+            }
         default:
             return state
     }
 }
-export type addPostType = ReturnType<typeof addPostAC>
-export type setUsersProfileType = ReturnType<typeof setUsersProfile>
-type setStatusType = ReturnType<typeof setStatus>
+export type AddPostType = ReturnType<typeof addPostAC>
+export type SetUsersProfileType = ReturnType<typeof setUsersProfile>
+export type SetStatusType = ReturnType<typeof setStatus>
+export type DeletePostType = ReturnType<typeof deletePost>
 export const addPostAC = (newPost: any) => {
     return {
         type: ADD_POST,
@@ -77,6 +84,16 @@ export const setStatus = (status: string) => {
         }
     } as const
 }
+
+export const deletePost = (userId: string) => {
+    return {
+        type: DELETE_POST,
+        payload: {
+            userId
+        }
+    } as const
+}
+
 export const profileUser = (userId: string) => {
     return (dispatch: any) => {
         profileAPI.getProfile(userId)

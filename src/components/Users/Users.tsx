@@ -3,6 +3,7 @@ import styles from "./user.module.css";
 import image from "../../assect/images/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png";
 import {UserPropsType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import s from "../Navbar/Navbar.module.css";
 
 
 type UsersPropsType = {

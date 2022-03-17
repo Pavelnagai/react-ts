@@ -14,12 +14,12 @@ export const UsersAPI = {
     },
 }
 
-export const FollowingAPI = {
+export const followingAPI = {
     followUsers(id: string) {
         return instans.post(`follow/${id}`)
     },
 
-    UnfollowUsers(id: string) {
+    unfollowUsers(id: string) {
         return instans.delete(`follow/${id}`)
     },
 }

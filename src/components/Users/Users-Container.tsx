@@ -25,18 +25,20 @@ import {LinearProgress} from "@mui/material";
 
 class UsersContainer extends React.PureComponent<UsersPropsType, any> {
     componentDidMount() {
-        this.props.getUser(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUser(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUser(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUser(pageNumber, pageSize)
 
     }
 
     render() {
         return <>
             {this.props.userPage.isFetching
-                    ? <LinearProgress />
+                ? <LinearProgress/>
                 : null}
             <Users
                 users={this.props.userPage.users}

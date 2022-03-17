@@ -8,14 +8,13 @@ import React, {ComponentType} from "react";
 import DialogsContainer from "./components/Navbar/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/Users-Container";
 import ProfileContainer from "./components/Navbar/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {AppStateType} from "./redux/store-redux";
 import {initializedApp} from "./redux/app.reducer";
 import {compose} from "redux";
-import Preloader from "./components/common/Preloader/Preloader";
 import PrimarySearchAppBar from "./Bar";
+import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
 
 
 export type AppPropsType = {}
@@ -27,13 +26,15 @@ class App extends React.Component<any, any> {
 
     render() {
         if (!this.props.initialized) {
-            return <Preloader/>
+            return <div
+                style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+                <CircularProgress/>
+            </div>
         }
         return (
             <div className={"app-wrapper"}>
                 <div className={'header'}>
                     <PrimarySearchAppBar/>
-                    {/*<HeaderContainer/>*/}
                 </div>
                 <div className={'content'}>
                     <div className={'navBar'}>

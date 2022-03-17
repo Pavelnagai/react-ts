@@ -111,15 +111,14 @@ export const getStatus = (userId: string) => {
     }
 }
 export const updateStatus = (status: string) => {
-    return (dispatch: any) => {
-        profileAPI.updateStatus(status)
-            .then(res => {
-                if (res.data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
-            .catch(rej => {
-                console.log('warning updateStatus')
-            })
+    return async (dispatch: any) => {
+        try {
+            const res = await profileAPI.updateStatus(status)
+            if (res.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        } catch (rej) {
+            console.log('warning updateStatus')
+        }
     }
 }

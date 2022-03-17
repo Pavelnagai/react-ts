@@ -15,7 +15,7 @@ export const appReducer = (state: InitialStateApp = initialState, action: Action
         case INITIALIZED_SUCCESS:
             return {
                 ...state,
-                initialized: true
+                initialized: action.payload.initialized
             }
         default:
             return state
@@ -23,15 +23,11 @@ export const appReducer = (state: InitialStateApp = initialState, action: Action
 }
 export type setInitialized = ReturnType<typeof initializedSuccess>
 
-export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
+export const initializedSuccess = (initialized: boolean) => ({type: INITIALIZED_SUCCESS, payload: {initialized}})
 
 
-export const initializedApp = () => (dispatch: any) => {
-    let promise = dispatch(getAuthUserData())
-    Promise.all([promise])
-        .then(() => {
-            dispatch(initializedSuccess())
-        })
+export const initializedApp = () => async (dispatch: any) => {
+    await dispatch(getAuthUserData())
 }
 
 

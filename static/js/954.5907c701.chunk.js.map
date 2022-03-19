@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/954.5907c701.chunk.js","mappings":"iIASA,UAPiB,WACb,OACI","sources":["components/Navbar/Settings/Settings.tsx"],"sourcesContent":["import React from \"react\";\n\nconst Settings = () => {\n    return (\n        <div>\n            Settings\n        </div>\n    )\n}\nexport default Settings"],"names":[],"sourceRoot":""}

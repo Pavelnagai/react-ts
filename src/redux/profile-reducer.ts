@@ -5,6 +5,7 @@ const ADD_POST = "ADD-POST"
 const SET_USERS_PROFILE = "SET_USERS_PROFILE"
 const SET_STATUS = "SET_STATUS"
 const DELETE_POST = "DELETE_POST"
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 
 export type PostPropsType = {
     id: string
@@ -23,7 +24,7 @@ let initialState = {
     profile: null,
     status: ''
 }
-type ActionType = AddPostType | SetUsersProfileType | SetStatusType | DeletePostType
+type ActionType = AddPostType | SetUsersProfileType | SetStatusType | DeletePostType | SavePhotoSuccessType
 
 export const profileReducer = (state: InitialStateProfileType = initialState, action: ActionType): InitialStateProfileType => {
     switch (action.type) {
@@ -52,6 +53,11 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
                 ...state,
                 post: state.post.filter(el => el.id !== action.payload.userId)
             }
+        case "SAVE_PHOTO_SUCCESS":
+            return {
+                // @ts-ignore
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state
     }
@@ -60,6 +66,7 @@ export type AddPostType = ReturnType<typeof addPostAC>
 export type SetUsersProfileType = ReturnType<typeof setUsersProfile>
 export type SetStatusType = ReturnType<typeof setStatus>
 export type DeletePostType = ReturnType<typeof deletePost>
+export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
 export const addPostAC = (newPost: any) => {
     return {
         type: ADD_POST,
@@ -94,6 +101,12 @@ export const deletePost = (userId: string) => {
     } as const
 }
 
+export const savePhotoSuccess = (photos: any) => {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+    } as const
+}
 export const profileUser = (userId: string) => {
     return (dispatch: any) => {
         profileAPI.getProfile(userId)
@@ -116,6 +129,19 @@ export const updateStatus = (status: string) => {
             const res = await profileAPI.updateStatus(status)
             if (res.data.resultCode === 0) {
                 dispatch(setStatus(status))
+            }
+        } catch (rej) {
+            console.log('warning updateStatus')
+        }
+    }
+}
+export const savePhoto = (file: any) => {
+    return async (dispatch: any) => {
+        try {
+            const res = await profileAPI.savePhoto(file)
+            if (res.data.resultCode === 0) {
+                debugger
+                dispatch(savePhotoSuccess(res.data.data.photos))
             }
         } catch (rej) {
             console.log('warning updateStatus')

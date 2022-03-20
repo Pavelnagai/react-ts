@@ -7,11 +7,13 @@ export type ProfilePropsType = {
     profile: any
     status: string
     updateStatus: any
+    savePhoto: any
+    owner: boolean
 }
 
 const Profile = React.memo((props: ProfilePropsType)=> {
     return <div className={s.content}>
-        <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+        <ProfileInfo owner={props.owner} savePhoto={props.savePhoto} profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
         <MyPostsContainer/>
     </div>
 })

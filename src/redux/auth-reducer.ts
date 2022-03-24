@@ -54,8 +54,8 @@ export const setToggleFetching = (isFetching: boolean) => {
     } as const
 }
 
-export const getAuthUserData = () => {
-    return async (dispatch: any) => {
+export const getAuthUserData = () => async (dispatch: any) => {
+    try {
         dispatch(setToggleFetching(true))
         const res = await AuthAPI.me()
         if (res.data.resultCode === 0) {
@@ -64,11 +64,13 @@ export const getAuthUserData = () => {
             dispatch(setAuthUserData(id, email, login, true))
             dispatch(setToggleFetching(false))
         }
+    } catch (e) {
+        console.log('1')
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => {
-    return async (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+    try {
         dispatch(setToggleFetching(true))
         const res = await AuthAPI.login(email, password, rememberMe)
         if (res.data.resultCode === 0) {
@@ -78,17 +80,26 @@ export const login = (email: string, password: string, rememberMe: boolean) => {
             let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error'
             dispatch(stopSubmit('Email', {_error: message}))
         }
+    } catch (e) {
+        console.log('2')
+
     }
 }
 
-export const logout = () => {
-    return async (dispatch: any) => {
+export const logout = () => async (dispatch: any) => {
+    try {
         dispatch(setToggleFetching(true))
+        dispatch(setAuthUserData(null, null, null, false))
+        dispatch(setToggleFetching(false))
         const res = await AuthAPI.logout()
         if (res.data.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null, false))
-            dispatch(setToggleFetching(false))
+
         }
+    } catch (e) {
+        console.log('3')
+
     }
+
 }
+
 

@@ -5,6 +5,7 @@ import {getStatus, profileUser, savePhoto, updateStatus} from "../../../redux/pr
 import {AppStateType} from "../../../redux/store-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../common/hoc/WithAuthRedirect";
 
 class ProfileContainer extends React.PureComponent<any, any> {
     refreshProfile() {
@@ -47,5 +48,6 @@ let mapStateToProps = (state: AppStateType) => ({
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {profileUser, getStatus, updateStatus, savePhoto}),
-    withRouter
+    withRouter,
+    withAuthRedirect,
 )(ProfileContainer)

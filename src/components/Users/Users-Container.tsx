@@ -10,7 +10,7 @@ import {
     unFollow
 } from "../../redux/users-reducer";
 import Users from "./Users";
-import {WithAuthRedirect} from "../common/hoc/WIthAuthRedirect";
+import {withAuthRedirect} from "../common/hoc/WithAuthRedirect";
 import {compose} from 'redux';
 import {
     getCurrentPage,
@@ -92,5 +92,5 @@ export default compose<ComponentType>(
         setFollowingProgress,
         getUser,
     }),
-    WithAuthRedirect
+    withAuthRedirect
 )(UsersContainer)

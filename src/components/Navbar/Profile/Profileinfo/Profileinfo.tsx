@@ -25,8 +25,12 @@ const ProfileInfo = (props: ProfileInfoProps) => {
         <div className={s.content}>
             <div className={s.decription}>
                 <img src={props.profile.photos.large || image} className={s.myPhoto}/>
-                {props.owner && <input type="file" onChange={changeMainPhotos}/>}
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <div>
+
+                    {props.owner && <label htmlFor="{'image'}">Update image</label> &&
+                        <input type="file" id={'image'} onChange={changeMainPhotos}/>}
+                </div>
+                <ProfileStatus status={props.status} owner={props.owner} updateStatus={props.updateStatus}/>
                 <div>{props.profile.contacts.vk}</div>
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>

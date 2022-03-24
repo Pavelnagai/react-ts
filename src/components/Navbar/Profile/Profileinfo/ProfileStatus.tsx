@@ -3,6 +3,7 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 type ProfileStatusPropsType = {
     status: string,
     updateStatus: (status: string) => void
+    owner: boolean
 }
 
 export const ProfileStatus = (props: ProfileStatusPropsType) => {
@@ -28,8 +29,7 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
 
     return (
         <div>
-            {
-                !editMode &&
+            {props.owner && !editMode &&
                 <div>
                     <span onDoubleClick={activateEditeMode}>{props.status || '------'}</span>
                 </div>

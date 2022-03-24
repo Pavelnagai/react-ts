@@ -107,20 +107,24 @@ export const savePhotoSuccess = (photos: any) => {
         photos
     } as const
 }
-export const profileUser = (userId: string) => {
-    return (dispatch: any) => {
-        profileAPI.getProfile(userId)
-            .then(res => {
-                dispatch(setUsersProfile(res.data))
-            })
+export const profileUser = (userId: string) => async (dispatch: any) => {
+    try {
+        if (userId) {
+            const res = await profileAPI.getProfile(userId)
+            dispatch(setUsersProfile(res.data))
+        }
+    } catch (e) {
+
     }
 }
-export const getStatus = (userId: string) => {
-    return (dispatch: any) => {
-        profileAPI.getStatus(userId)
-            .then(res => {
-                dispatch(setStatus(res.data))
-            })
+export const getStatus = (userId: string) => async (dispatch: any) => {
+    try {
+        if (userId) {
+            const res = await profileAPI.getStatus(userId)
+            dispatch(setStatus(res.data))
+        }
+    } catch (e) {
+
     }
 }
 export const updateStatus = (status: string) => {
@@ -140,7 +144,6 @@ export const savePhoto = (file: any) => {
         try {
             const res = await profileAPI.savePhoto(file)
             if (res.data.resultCode === 0) {
-                debugger
                 dispatch(savePhotoSuccess(res.data.data.photos))
             }
         } catch (rej) {

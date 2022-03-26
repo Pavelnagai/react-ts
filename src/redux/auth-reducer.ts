@@ -63,6 +63,8 @@ export const getAuthUserData = () => async (dispatch: any) => {
             dispatch(initializedSuccess(true))
             dispatch(setAuthUserData(id, email, login, true))
             dispatch(setToggleFetching(false))
+        }else {
+           dispatch(initializedSuccess(true))
         }
     } catch (e) {
         console.log('1')
@@ -89,15 +91,15 @@ export const login = (email: string, password: string, rememberMe: boolean) => a
 export const logout = () => async (dispatch: any) => {
     try {
         dispatch(setToggleFetching(true))
-        dispatch(setAuthUserData(null, null, null, false))
-        dispatch(setToggleFetching(false))
         const res = await AuthAPI.logout()
         if (res.data.resultCode === 0) {
-
+            dispatch(setAuthUserData(null, null, null, false))
         }
     } catch (e) {
         console.log('3')
 
+    } finally {
+        dispatch(setToggleFetching(false))
     }
 
 }

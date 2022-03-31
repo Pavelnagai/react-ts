@@ -63,8 +63,8 @@ export const getAuthUserData = () => async (dispatch: any) => {
             dispatch(initializedSuccess(true))
             dispatch(setAuthUserData(id, email, login, true))
             dispatch(setToggleFetching(false))
-        }else {
-           dispatch(initializedSuccess(true))
+        } else {
+            dispatch(initializedSuccess(true))
         }
     } catch (e) {
         console.log('1')
